@@ -1,29 +1,57 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.caskade-automation.llm4cap</groupId>
-  <artifactId>llm4cap</artifactId>
+  <artifactId>llm4cap-cli</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
   	<dependency>
-  	<groupId>org.apache.jena</groupId>
-  	<artifactId>apache-jena-libs</artifactId>
-  	<type>pom</type>
-  	<version>5.0.0</version>
-	</dependency>
-	<dependency>
-  	<groupId>org.apache.jena</groupId>
-  	<artifactId>jena-shacl</artifactId>
-  	<version>5.0.0</version>
-	</dependency>
-	<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>2.0.13</version>
-	</dependency>
-	<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-jdk14</artifactId>
-    <version>2.0.13</version>
+	    <groupId>info.picocli</groupId>
+	    <artifactId>picocli</artifactId>
+	    <version>4.7.6</version>
 	</dependency>
   </dependencies>
+  <build>
+  	<plugins>
+  		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-compiler-plugin</artifactId>
+		  <!-- annotationProcessorPaths requires maven-compiler-plugin version 3.5 or higher -->
+		  <version>3.13.0</version>
+		  <configuration>
+		    <annotationProcessorPaths>
+		      <path>
+		        <groupId>info.picocli</groupId>
+		        <artifactId>picocli-codegen</artifactId>
+		        <version>4.7.6</version>
+		      </path>
+		    </annotationProcessorPaths>
+		    <!-- compilerArgs can be defined additionally to shade jar with other jars that also contain generated config files -->
+		  </configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-jar-plugin</artifactId>
+		    <version>3.4.1</version>
+		</plugin>
+		<plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>llm4cap_cli.LLM4CapCLI</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+  	</plugins>
+  </build>
 </project>
