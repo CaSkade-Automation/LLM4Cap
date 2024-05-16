@@ -1,0 +1,1 @@
+There is a multiplication capability that takes two integer factors "a" and "b" as input and returns an integer "product" as output, where all three entities are information. Each of the two inputs has a property that determines the value of that factor. Likewise, the output "product" has a property that gives the result of the multiplication as an assurance. 

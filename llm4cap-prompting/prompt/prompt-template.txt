@@ -1,0 +1,35 @@
+--- Instruction ---
+Translate a natural language input describing a capability into an OWL ontology in Turtle syntax based on the given terminological knowledge from the context description. Use classes and properties of the given terminological knowledge to define corresponding OWL individuals and link them to each other using properties for all details from the input. 
+
+--- Context ---
+${T-Box}
+
+--- Input Data ---
+${Example Task 1}
+
+--- Output --- 
+OWL-Ontology:
+
+${Example Capability A-Box 1}
+
+--- Input Data ---
+${Example Task 2}
+
+--- Output --- 
+OWL-Ontology:
+
+${Example Capability A-Box 2}
+
+--- Input Data ---
+${Example Task 3}
+
+--- Output --- 
+OWL-Ontology:
+
+${Example Capability A-Box 3}
+
+--- Input Data ---
+${Task}
+
+--- Output --- 
+OWL-Ontology:

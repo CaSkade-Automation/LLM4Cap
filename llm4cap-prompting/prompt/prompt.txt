@@ -1,0 +1,2909 @@
+--- Instruction ---
+Translate a natural language input describing a capability into an OWL ontology in Turtle syntax based on the given terminological knowledge from the context description. Use classes and properties of the given terminological knowledge to define corresponding OWL individuals and link them to each other using properties for all details from the input. 
+
+--- Context ---
+@prefix : <http://www.w3id.org/hsu-aut/cask#> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ISA88: <http://www.hsu-ifa.de/ontologies/ISA-TR88#> .
+@prefix VDI2206: <http://www.hsu-ifa.de/ontologies/VDI2206#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix DINEN61360: <http://www.hsu-ifa.de/ontologies/DINEN61360#> .
+@base <http://www.w3id.org/hsu-aut/cask#> .
+
+<http://www.w3id.org/hsu-aut/cask> rdf:type owl:Ontology ;
+                                    owl:versionIRI <http://www.w3id.org/hsu-aut/cask/2.5.3> ;
+                                    rdfs:comment "A domain ontology to describe capabilities and skills. This ontology extends the concepts defined in the CSS ontology (https://github.com/hsu-aut/css-ontology) by using ontology design patterns for different standards." ,
+                                                 "An ontology for the Capability, Skill and Service reference model defined by Plattform Industrie 4.0. See https://www.plattform-i40.de/IP/Redaktion/DE/Downloads/Publikation/CapabilitiesSkillsServices.html for a description of the abstract reference model." ;
+                                    rdfs:isDefinedBy "https://www.plattform-i40.de/IP/Redaktion/DE/Downloads/Publikation/CapabilitiesSkillsServices.html" ;
+                                    owl:versionInfo "2.5.3" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+### arguments
+<http://openmath.org/vocab/math#arguments> rdf:type owl:ObjectProperty .
+
+
+### attributeKey
+<http://openmath.org/vocab/math#attributeKey> rdf:type owl:ObjectProperty .
+
+
+### attributeValue
+<http://openmath.org/vocab/math#attributeValue> rdf:type owl:ObjectProperty .
+
+
+### binder
+<http://openmath.org/vocab/math#binder> rdf:type owl:ObjectProperty .
+
+
+### body
+<http://openmath.org/vocab/math#body> rdf:type owl:ObjectProperty .
+
+
+### operator
+<http://openmath.org/vocab/math#operator> rdf:type owl:ObjectProperty .
+
+
+### symbol
+<http://openmath.org/vocab/math#symbol> rdf:type owl:ObjectProperty .
+
+
+### target
+<http://openmath.org/vocab/math#target> rdf:type owl:ObjectProperty .
+
+
+### variables
+<http://openmath.org/vocab/math#variables> rdf:type owl:ObjectProperty .
+
+
+### example
+<http://openmath.org/vocab/math/meta#example> rdf:type owl:ObjectProperty .
+
+
+### formalProperty
+<http://openmath.org/vocab/math/meta#formalProperty> rdf:type owl:ObjectProperty .
+
+
+### Data_Element_describes
+DINEN61360:Data_Element_describes rdf:type owl:ObjectProperty ;
+                                  owl:inverseOf DINEN61360:has_Data_Element ;
+                                  rdfs:domain DINEN61360:Data_Element ;
+                                  rdfs:comment """Description:
+This ObjectProperty is used to connect a data element with any kind of entity that is described by the data element""" .
+
+
+### Instance_Description_has_Type
+DINEN61360:Instance_Description_has_Type rdf:type owl:ObjectProperty ;
+                                         owl:inverseOf DINEN61360:Type_Description_has_Instance ;
+                                         rdfs:domain DINEN61360:Instance_Description ;
+                                         rdfs:range DINEN61360:Type_Description .
+
+
+### Type_Description_has_Instance
+DINEN61360:Type_Description_has_Instance rdf:type owl:ObjectProperty ;
+                                         rdfs:domain DINEN61360:Type_Description ;
+                                         rdfs:range DINEN61360:Instance_Description .
+
+
+### complex_Data_Type_has_Member
+DINEN61360:complex_Data_Type_has_Member rdf:type owl:ObjectProperty ;
+                                        owl:inverseOf DINEN61360:is_Member_of_Complex_Data_Type ;
+                                        rdfs:domain [ owl:intersectionOf ( DINEN61360:Instance_Description
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty DINEN61360:Instance_Description_has_Type ;
+                                                                             owl:allValuesFrom DINEN61360:Complex_Data_Type
+                                                                           ]
+                                                                         ) ;
+                                                      rdf:type owl:Class
+                                                    ] ;
+                                        rdfs:range DINEN61360:Complex_Data_Type_Member ;
+                                        rdfs:comment """Description:
+ObjectProperty that is used to connect an instance of a complex data type with corresponding members of the complex data type. These members are connected to types and instances of other (complex) data types""" .
+
+
+### has_Data_Element
+DINEN61360:has_Data_Element rdf:type owl:ObjectProperty ;
+                            rdfs:range DINEN61360:Data_Element ;
+                            rdfs:comment """Description:
+This ObjectProperty is used to connect any kind of entity with a data element that is used for its description.""" .
+
+
+### has_Instance_Description
+DINEN61360:has_Instance_Description rdf:type owl:ObjectProperty ;
+                                    owl:inverseOf DINEN61360:is_Instance_Description_of_Data_Element ;
+                                    rdf:type owl:InverseFunctionalProperty ;
+                                    rdfs:domain [ rdf:type owl:Class ;
+                                                  owl:unionOf ( DINEN61360:Complex_Data_Type_Member
+                                                                DINEN61360:Data_Element
+                                                              )
+                                                ] ;
+                                    rdfs:range DINEN61360:Instance_Description ;
+                                    rdfs:comment """Description:
+ObjectProperty is used to connect an individual that needs to be described by DataProperties with the Instance Description of that properties.""" .
+
+
+### has_Type_Description
+DINEN61360:has_Type_Description rdf:type owl:ObjectProperty ;
+                                owl:inverseOf DINEN61360:is_Type_Description_of_Data_Element ;
+                                rdf:type owl:FunctionalProperty ;
+                                rdfs:domain [ rdf:type owl:Class ;
+                                              owl:unionOf ( DINEN61360:Complex_Data_Type_Member
+                                                            DINEN61360:Data_Element
+                                                          )
+                                            ] ;
+                                rdfs:range DINEN61360:Type_Description ;
+                                rdfs:comment """Description:
+ObjectProperty is used to connect an individual that needs to be described by DataProperties with the Type Description of that properties.
+
+Functional:
+Any indivudual representing a property, can have only one Type Description""" .
+
+
+### is_Instance_Description_of_Data_Element
+DINEN61360:is_Instance_Description_of_Data_Element rdf:type owl:ObjectProperty ;
+                                                   rdfs:comment """Description:
+ObjectProperty is used to connect an Instance Description with the Data_Element that it describes.
+
+Inverse of has_Instance_Description""" .
+
+
+### is_Member_of_Complex_Data_Type
+DINEN61360:is_Member_of_Complex_Data_Type rdf:type owl:ObjectProperty ;
+                                          rdfs:domain DINEN61360:Complex_Data_Type_Member ;
+                                          rdfs:range [ owl:intersectionOf ( DINEN61360:Instance_Description
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty DINEN61360:Instance_Description_has_Type ;
+                                                                              owl:allValuesFrom DINEN61360:Complex_Data_Type
+                                                                            ]
+                                                                          ) ;
+                                                       rdf:type owl:Class
+                                                     ] .
+
+
+### is_Type_Description_of_Data_Element
+DINEN61360:is_Type_Description_of_Data_Element rdf:type owl:ObjectProperty ;
+                                               rdfs:comment """Description:
+ObjectProperty is used to connect a Type_Description with a Data_Element that has instace descriptions of this type. 
+
+Inverse of has_Type_Description""" .
+
+
+### first
+rdf:first rdf:type owl:ObjectProperty .
+
+
+### rest
+rdf:rest rdf:type owl:ObjectProperty .
+
+
+### consistsOf
+VDI3682:consistsOf rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdfs:domain VDI3682:Process ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( VDI3682:ProcessOperator
+                                              VDI3682:State
+                                              VDI3682:SystemLimit
+                                            )
+                              ] ;
+                   rdfs:comment "Describes containment of process elements (state, process operator, system limit) within a process"@en .
+
+
+### dependency
+VDI3682:dependency rdf:type owl:ObjectProperty ;
+                   rdfs:domain VDI3682:State ;
+                   rdfs:range VDI3682:State ;
+                   rdfs:comment """This ObjectProperty is not explicitly contained within the VDI 3682. It is used to describe dependencies of In- and Outputs. Due to open world assumption (OWA) the case that more than one In- or Outputs occur does always mean an alternative Input. For the case, that In- and Outputs are depending on each other, the ObjectProperty Dependency can be used. It can be interpreted as an \"AND\" constructor between In- and/or Outputs of a process.
+
+E.g.: A process has two Inputs. If they are alternatives, then this fact must not  be explcitly modelled. If both Inputs have to go into the process, then the \"Dependency\" ObjectProperty is assigned between them.
+
+More complex example: Input A and B have to go into a process, while Input C and D are alternatives for A and B. The Inputs have to go as groups in the process. This equals: A AND B OR C AND D. The Dependency Operator is used between A and B as well as between C and D.
+
+Furthermore, the Operator can be used to express dependencies between In- and Outputs. If A and B are alternative Inputs that result in the Ouputs C for A or D for B then this equals: A AND C or D AND B. The ObjectProperty can be used between both, In- and/or Outputs."""@en .
+
+
+### flow
+VDI3682:flow rdf:type owl:ObjectProperty ;
+             rdfs:comment "most generic concept for flows taken from VDI3682 and refined by semantics that is used in graphical notation" .
+
+
+### hasAlternativeInput
+VDI3682:hasAlternativeInput rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf VDI3682:hasInput .
+
+
+### hasAlternativeOutput
+VDI3682:hasAlternativeOutput rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf VDI3682:hasOutput .
+
+
+### hasInput
+VDI3682:hasInput rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf VDI3682:flow ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( VDI3682:Process
+                                             VDI3682:ProcessOperator
+                                           )
+                             ] ;
+                 rdfs:range VDI3682:State ;
+                 rdfs:comment "ObjectProperty that is used to link a ProcessOperator with an Input, i.e. Energy or Information or Product." .
+
+
+### hasOutput
+VDI3682:hasOutput rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf VDI3682:flow ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( VDI3682:Process
+                                              VDI3682:ProcessOperator
+                                            )
+                              ] ;
+                  rdfs:range VDI3682:State ;
+                  rdfs:comment "ObjectProperty that is used to link a ProcessOperator with an Output, i.e. Energy or Information or Product." .
+
+
+### hasParallelInput
+VDI3682:hasParallelInput rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf VDI3682:hasInput .
+
+
+### hasParallelOutput
+VDI3682:hasParallelOutput rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf VDI3682:hasOutput .
+
+
+### hasPredecessor
+VDI3682:hasPredecessor rdf:type owl:ObjectProperty ;
+                       owl:inverseOf VDI3682:hasSuccessor ;
+                       rdf:type owl:TransitiveProperty ;
+                       rdfs:domain VDI3682:ProcessOperator ;
+                       rdfs:range VDI3682:ProcessOperator ;
+                       owl:propertyChainAxiom ( VDI3682:hasInput
+                                                [ owl:inverseOf VDI3682:hasOutput
+                                                ]
+                                              ) ;
+                       rdfs:comment "an object property that is used to infer a predecessing relationship between entities" .
+
+
+### hasSubProcess
+VDI3682:hasSubProcess rdf:type owl:ObjectProperty ,
+                               owl:TransitiveProperty ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( VDI3682:Process
+                                                  VDI3682:ProcessOperator
+                                                )
+                                  ] ;
+                      rdfs:range VDI3682:Process ;
+                      owl:propertyChainAxiom ( VDI3682:isComposedOf
+                                               [ owl:inverseOf VDI3682:consistsOf
+                                               ]
+                                             ) ;
+                      rdfs:comment "Is used to find the complete decomposed process of a process operatore. Note: This is syntactic sugar as a subprocess can be found by following \"isComposedOf\" and the inverse of \"consistsOf\"." .
+
+
+### hasSuccessor
+VDI3682:hasSuccessor rdf:type owl:ObjectProperty ,
+                              owl:TransitiveProperty ;
+                     rdfs:domain VDI3682:ProcessOperator ;
+                     rdfs:range VDI3682:ProcessOperator ;
+                     owl:propertyChainAxiom ( VDI3682:hasOutput
+                                              [ owl:inverseOf VDI3682:hasInput
+                                              ]
+                                            ) ;
+                     rdfs:comment "an object property that is used to infer a successing relationshipt between entities" .
+
+
+### hasUpperProcess
+VDI3682:hasUpperProcess rdf:type owl:ObjectProperty ;
+                        rdfs:domain [ rdf:type owl:Class ;
+                                      owl:unionOf ( VDI3682:Process
+                                                    VDI3682:ProcessOperator
+                                                  )
+                                    ] ;
+                        rdfs:range VDI3682:Process ;
+                        owl:propertyChainAxiom ( [ owl:inverseOf VDI3682:isComposedOf
+                                                 ]
+                                                 [ owl:inverseOf VDI3682:consistsOf
+                                                 ]
+                                               ) ;
+                        rdfs:comment "Is used to find the parent (upper) process of a lower level process operator. Note: This is syntactic sugar as a parent process can be found by following the inverse of \"isComposedOf\" and the inverse of \"consistsOf\"." .
+
+
+### isAssignedTo
+VDI3682:isAssignedTo rdf:type owl:ObjectProperty ;
+                     rdfs:domain VDI3682:ProcessOperator ;
+                     rdfs:range VDI3682:TechnicalResource ;
+                     rdfs:comment "ObjectProperty that is used to indicate that a process operator is performed by a technical resource." .
+
+
+### isCharacterizedBy
+VDI3682:isCharacterizedBy rdf:type owl:ObjectProperty ;
+                          rdfs:range VDI3682:Characteristic .
+
+
+### isComposedOf
+VDI3682:isComposedOf rdf:type owl:ObjectProperty ;
+                     rdfs:domain VDI3682:ProcessOperator ;
+                     rdfs:range VDI3682:ProcessOperator ;
+                     rdfs:comment "Used for decomposition. A process operator can be composed of multiple more detailed process operators." .
+
+
+### isIdentifiedBy
+VDI3682:isIdentifiedBy rdf:type owl:ObjectProperty ;
+                       rdfs:range VDI3682:Identification .
+
+
+### exposesSkillMethod
+:exposesSkillMethod rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf CSS:exposes ;
+                    rdfs:domain CSS:SkillInterface ;
+                    rdfs:range :SkillMethod .
+
+
+### exposesSkillOutput
+:exposesSkillOutput rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :exposesSkillVariable ;
+                    rdfs:domain CSS:SkillInterface ;
+                    rdfs:range :SkillOutput .
+
+
+### exposesSkillParameter
+:exposesSkillParameter rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :exposesSkillVariable ;
+                       rdfs:domain CSS:SkillInterface ;
+                       rdfs:range CSS:SkillParameter .
+
+
+### exposesSkillVariable
+:exposesSkillVariable rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf CSS:exposes ;
+                      rdfs:domain CSS:SkillInterface ;
+                      rdfs:range :SkillVariable .
+
+
+### exposesStateMachine
+:exposesStateMachine rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf CSS:exposes ;
+                     rdfs:domain CSS:SkillInterface ;
+                     rdfs:range CSS:StateMachine .
+
+
+### hasCurrentState
+:hasCurrentState rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ,
+                          owl:AsymmetricProperty ;
+                 rdfs:domain CSS:Skill ;
+                 rdfs:range ISA88:State .
+
+
+### hasCurrentStateOutput
+:hasCurrentStateOutput rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :hasSkillOutput .
+
+
+### hasSkillCommand
+:hasSkillCommand rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf CSS:hasParameter ;
+                 rdfs:domain CSS:Skill ;
+                 rdfs:range :SkillCommand .
+
+
+### hasSkillMethod
+:hasSkillMethod rdf:type owl:ObjectProperty ;
+                rdfs:domain CSS:Skill ;
+                rdfs:range :SkillMethod .
+
+
+### hasSkillOutput
+:hasSkillOutput rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :hasSkillVariable ;
+                rdfs:domain CSS:Skill ;
+                rdfs:range :SkillOutput .
+
+
+### hasSkillVariable
+:hasSkillVariable rdf:type owl:ObjectProperty ;
+                  rdfs:domain CSS:Skill ;
+                  rdfs:range :SkillVariable .
+
+
+### invokes
+:invokes rdf:type owl:ObjectProperty ;
+         owl:inverseOf :isInvokedBy ;
+         rdfs:domain :SkillMethod ;
+         rdfs:range ISA88:Transition .
+
+
+### isInvokedBy
+:isInvokedBy rdf:type owl:ObjectProperty .
+
+
+### accessibleThrough
+CSS:accessibleThrough rdf:type owl:ObjectProperty ;
+                      rdfs:domain CSS:Skill ;
+                      rdfs:range CSS:SkillInterface .
+
+
+### assures
+CSS:assures rdf:type owl:ObjectProperty ;
+            rdfs:domain CSS:Service ;
+            rdfs:range CSS:Product .
+
+
+### behaviorConformsTo
+CSS:behaviorConformsTo rdf:type owl:ObjectProperty ;
+                       rdfs:domain CSS:Resource ,
+                                   CSS:Skill ;
+                       rdfs:range CSS:StateMachine .
+
+
+### controls
+CSS:controls rdf:type owl:ObjectProperty ;
+             rdfs:domain CSS:Skill ;
+             rdfs:range CSS:Process .
+
+
+### demands
+CSS:demands rdf:type owl:ObjectProperty ;
+            rdfs:domain CSS:ServiceRequester ;
+            rdfs:range CSS:Service .
+
+
+### exposes
+CSS:exposes rdf:type owl:ObjectProperty ;
+            rdfs:domain CSS:SkillInterface ;
+            rdfs:range :SkillMethod ,
+                       CSS:SkillParameter ,
+                       CSS:StateMachine .
+
+
+### hasInput
+CSS:hasInput rdf:type owl:ObjectProperty ;
+             rdfs:domain CSS:Process ;
+             rdfs:range CSS:Product .
+
+
+### hasOutput
+CSS:hasOutput rdf:type owl:ObjectProperty ;
+              rdfs:domain CSS:Process ;
+              rdfs:range CSS:Product .
+
+
+### hasParameter
+CSS:hasParameter rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasSkillVariable ;
+                 rdfs:domain CSS:Skill ;
+                 rdfs:range CSS:SkillParameter .
+
+
+### isInputFor
+CSS:isInputFor rdf:type owl:ObjectProperty ;
+               rdfs:domain CSS:Service ;
+               rdfs:range CSS:ServiceOffer .
+
+
+### isRealizedBy
+CSS:isRealizedBy rdf:type owl:ObjectProperty ;
+                 rdfs:domain CSS:Capability ,
+                             CSS:Property ;
+                 rdfs:range CSS:Skill ,
+                            CSS:SkillParameter .
+
+
+### isRealizedBySkill
+CSS:isRealizedBySkill rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf CSS:isRealizedBy ;
+                      rdfs:domain CSS:Capability ;
+                      rdfs:range CSS:Skill .
+
+
+### isRealizedBySkillParameter
+CSS:isRealizedBySkillParameter rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf CSS:isRealizedBy ;
+                               rdfs:domain CSS:Property ;
+                               rdfs:range CSS:SkillParameter .
+
+
+### isRestrictedBy
+CSS:isRestrictedBy rdf:type owl:ObjectProperty ;
+                   rdfs:domain CSS:Capability ;
+                   rdfs:range CSS:CapabilityConstraint .
+
+
+### isSpecifiedBy
+CSS:isSpecifiedBy rdf:type owl:ObjectProperty ;
+                  rdfs:domain CSS:Capability ,
+                              CSS:Service ;
+                  rdfs:range CSS:Property .
+
+
+### offers
+CSS:offers rdf:type owl:ObjectProperty ;
+           rdfs:domain CSS:ServiceProvider ;
+           rdfs:range CSS:Service .
+
+
+### offersUseOf
+CSS:offersUseOf rdf:type owl:ObjectProperty ;
+                rdfs:domain CSS:Service ;
+                rdfs:range CSS:Capability .
+
+
+### proposes
+CSS:proposes rdf:type owl:ObjectProperty ;
+             rdfs:domain CSS:ServiceProvider ;
+             rdfs:range CSS:ServiceOffer .
+
+
+### provides
+CSS:provides rdf:type owl:ObjectProperty ;
+             rdfs:domain CSS:Resource .
+
+
+### providesCapability
+CSS:providesCapability rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf CSS:provides ;
+                       rdfs:domain CSS:Resource ;
+                       rdfs:range :ProvidedCapability ,
+                                  CSS:Capability .
+
+
+### providesSkill
+CSS:providesSkill rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf CSS:provides ;
+                  rdfs:domain CSS:Resource ;
+                  rdfs:range CSS:Skill .
+
+
+### receives
+CSS:receives rdf:type owl:ObjectProperty ;
+             rdfs:domain CSS:ServiceRequester ;
+             rdfs:range CSS:ServiceOffer .
+
+
+### references
+CSS:references rdf:type owl:ObjectProperty ;
+               rdfs:domain CSS:CapabilityConstraint ;
+               rdfs:range CSS:Property .
+
+
+### requiresCapability
+CSS:requiresCapability rdf:type owl:ObjectProperty ;
+                       rdfs:domain CSS:Process ;
+                       rdfs:range CSS:Capability .
+
+
+### requiresProduct
+CSS:requiresProduct rdf:type owl:ObjectProperty ;
+                    rdfs:domain CSS:ServiceRequester ;
+                    rdfs:range CSS:Product .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+### encoding
+<http://openmath.org/vocab/math#encoding> rdf:type owl:DatatypeProperty ;
+                                          rdfs:comment "Specifies the encoding of a foreign object." .
+
+
+### name
+<http://openmath.org/vocab/math#name> rdf:type owl:DatatypeProperty ;
+                                      rdfs:comment "Represents the name of a variable." .
+
+
+### value
+<http://openmath.org/vocab/math#value> rdf:type owl:DatatypeProperty ;
+                                       rdfs:comment "Represents the value of a literal or a foreign object." .
+
+
+### commentedProperty
+<http://openmath.org/vocab/math/meta#commentedProperty> rdf:type owl:DatatypeProperty .
+
+
+### description
+<http://openmath.org/vocab/math/meta#description> rdf:type owl:DatatypeProperty .
+
+
+### Array_Member_Dimension
+DINEN61360:Array_Member_Dimension rdf:type owl:DatatypeProperty ;
+                                  rdfs:domain DINEN61360:Array_Member ;
+                                  rdfs:range xsd:int ;
+                                  rdfs:comment """Description:
+
+Indicates the dimension of an array member.""" .
+
+
+### Array_Member_Position
+DINEN61360:Array_Member_Position rdf:type owl:DatatypeProperty ;
+                                 rdfs:comment """Description:
+
+DataProperty that indicates the position of an Array_Member in a DataType List.""" .
+
+
+### Boolean_Operator
+DINEN61360:Boolean_Operator rdf:type owl:DatatypeProperty ,
+                                     owl:FunctionalProperty ;
+                            rdfs:range [ rdf:type rdfs:Datatype ;
+                                         owl:oneOf [ rdf:type rdf:List ;
+                                                     rdf:first "AND" ;
+                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                rdf:first "NAND" ;
+                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                           rdf:first "NOR" ;
+                                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                                      rdf:first "OR" ;
+                                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                                 rdf:first "XOR" ;
+                                                                                                 rdf:rest rdf:nil
+                                                                                               ]
+                                                                                    ]
+                                                                         ]
+                                                              ]
+                                                   ]
+                                       ] ;
+                            rdfs:comment "Is used with Boolean_Association to define what kind of boolean relation connects the Data_Elements of the Boolean_Association" .
+
+
+### Code
+DINEN61360:Code rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain DINEN61360:Type_Description ;
+                rdfs:comment """Description:
+DIN EN 61360-1:2018 Section 7.3
+Unique identifier of this data element type. Preferable this should be a standardized identifier (e.g. from eclss or common data dictionary).  optional exlusion of \"o\" and \"i\" is not implemented.    
+
+Liability: necessary    
+
+type: string with 6 digits between, first three digits are a-z and last three digits are 0-9  poposed data range expression: xsd:string[pattern \"[a-z0-9] {6}\"]""" .
+
+
+### Created_at_Date
+DINEN61360:Created_at_Date rdf:type owl:DatatypeProperty ;
+                           rdfs:domain DINEN61360:Instance_Description ;
+                           rdfs:range xsd:dateTimeStamp ;
+                           rdfs:comment """Description: 
+A SemAnz40 attribute, that indicates the creation date for an instance.""" .
+
+
+### Definition
+DINEN61360:Definition rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:domain DINEN61360:Type_Description ;
+                      rdfs:comment """Description:
+A textual definition of the data element
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 8.3
+
+Type: String
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Drawing_Reference
+DINEN61360:Drawing_Reference rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf owl:topDataProperty ;
+                             rdfs:domain DINEN61360:Type_Description ;
+                             rdfs:comment """Description:
+A link to a drawing (or picture) that is used for further explanation of the data element
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.13
+
+Type: Contains a URL link as a string to a picture
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Expression_Goal
+DINEN61360:Expression_Goal rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdf:type owl:FunctionalProperty ;
+                           rdfs:domain DINEN61360:Instance_Description ;
+                           rdfs:range [ rdf:type rdfs:Datatype ;
+                                        owl:oneOf [ rdf:type rdf:List ;
+                                                    rdf:first "Actual_Value" ;
+                                                    rdf:rest [ rdf:type rdf:List ;
+                                                               rdf:first "Assurance" ;
+                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                          rdf:first "Requirement" ;
+                                                                          rdf:rest rdf:nil
+                                                                        ]
+                                                             ]
+                                                  ]
+                                      ] ;
+                           rdfs:comment """Description:
+
+The goal of the values expression, which can be a Requirement, an Assurance or an actual (e.g. measured) value.
+
+Liability: Necessary""" .
+
+
+### Format_DIN61360_SemAnz40
+DINEN61360:Format_DIN61360_SemAnz40 rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf owl:topDataProperty ;
+                                    rdfs:domain DINEN61360:Data_Element ;
+                                    rdfs:comment """Description: 
+
+Indicates, whether the described type or entity is described by the DIN61360&SemAnz40 Format.
+
+Liability: Necessary
+
+Type: If true, the Data Element is based on the Din61360 and SemAnz40 description
+
+Poposed Data Range Expression: xsd:boolean""" .
+
+
+### Formula
+DINEN61360:Formula rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain DINEN61360:Type_Description ;
+                   rdfs:comment """Description:
+A mathematical euqation that is being used for characterization of the data element
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.5
+
+Type: contains a URL link as a string to a source file that describes the formula
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### List_Member_Position
+DINEN61360:List_Member_Position rdf:type owl:DatatypeProperty ;
+                                rdfs:domain DINEN61360:List_Member ;
+                                rdfs:range xsd:int ;
+                                rdfs:comment """Description:
+
+DataProperty that indicates the position of a List_Member in a DataType List.""" .
+
+
+### Logic_Interpretation
+DINEN61360:Logic_Interpretation rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf owl:topDataProperty ;
+                                rdf:type owl:FunctionalProperty ;
+                                rdfs:domain DINEN61360:Instance_Description ;
+                                rdfs:range [ rdf:type rdfs:Datatype ;
+                                             owl:oneOf [ rdf:type rdf:List ;
+                                                         rdf:first "<" ;
+                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                    rdf:first "<=" ;
+                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                               rdf:first "=" ;
+                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                          rdf:first ">" ;
+                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                     rdf:first ">=" ;
+                                                                                                     rdf:rest rdf:nil
+                                                                                                   ]
+                                                                                        ]
+                                                                             ]
+                                                                  ]
+                                                       ]
+                                           ] ;
+                                rdfs:comment """Description:
+
+Indicates, whether a value with a certain Expression Goal has to be considered as equal (\"=\"), greater than (\"<\"), lower than (\">\") or in combination with an equals (i.e. \"<=\", \">=\").
+
+Liability: Necessary""" .
+
+
+### Note
+DINEN61360:Note rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain DINEN61360:Type_Description ;
+                rdfs:comment """Description:
+Additional information that are important to understand the meaning of the data element
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 8.4
+
+Type: String
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Preferred_Letter_Symbol
+DINEN61360:Preferred_Letter_Symbol rdf:type owl:DatatypeProperty ;
+                                   rdfs:subPropertyOf owl:topDataProperty ;
+                                   rdfs:domain DINEN61360:Type_Description ;
+                                   rdfs:comment """Description:
+A sign or literal that is used to represent the property (e.g. greek \"sigma\" for tension))
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.6
+
+Type: IEC 60027, IEC 60747 or IEC 60148 compliant formula sign described as a string
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Preferred_Name
+DINEN61360:Preferred_Name rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdfs:domain DINEN61360:Type_Description ;
+                          rdfs:comment """Description:
+Represents the preferred name of the data element type, that is being used for searches for instance.
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.4
+
+Type: String with lower and upper case, with a maximum of 70 characters
+
+Poposed Data Range Expression: xsd:string[maxLength 70]""" .
+
+
+### Quality
+DINEN61360:Quality rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain DINEN61360:Instance_Description ;
+                   rdfs:comment """Description:
+
+Not supported so far, since it requires a additional quality ontology""" .
+
+
+### Remark
+DINEN61360:Remark rdf:type owl:DatatypeProperty ;
+                  rdfs:domain DINEN61360:Type_Description ;
+                  rdfs:comment """Additional information that can be used to express a oppinion but should not change the meaning of the definition.
+DIN EN 61360-1:2018 Section 8.5""" .
+
+
+### Revision_Number
+DINEN61360:Revision_Number rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain DINEN61360:Type_Description ;
+                           rdfs:comment """Description:
+Number that represents the actual count of changes
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.5
+
+Type: Integer with two digits between 1 and 99
+
+Poposed Data Range Expression: xsd:integer[>= 1 , <= 99]""" .
+
+
+### Short_Name
+DINEN61360:Short_Name rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:domain DINEN61360:Type_Description ;
+                      rdfs:comment """Description:
+A short name or acronym that is used for the preferred name
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.6
+
+Type: Strong restrictions of DIN61360  not implemented, just strings necessary. Maximum characters is 17.
+
+Poposed Data Range Expression: xsd:string[maxLength 17]""" .
+
+
+### Source_Document_of_Definition
+DINEN61360:Source_Document_of_Definition rdf:type owl:DatatypeProperty ;
+                                         rdfs:subPropertyOf owl:topDataProperty ;
+                                         rdfs:domain DINEN61360:Type_Description ;
+                                         rdfs:comment """Description:
+A link to a source file, where the definition of the data element was taken from
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 8.6
+
+Type: Should contain a description of the source document with a maximum of 80 characters. Document has to be approved by ISO or IEC (e.g. should be a standard like IEC XXXXX). Alternatively use a URL to give a source document that is not approved by ISO.
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Synonymous_Letter_Symbol
+DINEN61360:Synonymous_Letter_Symbol rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf owl:topDataProperty ;
+                                    rdfs:domain DINEN61360:Type_Description ;
+                                    rdfs:comment """Description:
+A synonym that is used for the preferred equation sign
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.7
+
+Type: IEC 60027, IEC 60747 or IEC 60148 compliant formula sign
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Synonymous_Name
+DINEN61360:Synonymous_Name rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain DINEN61360:Type_Description ;
+                           rdfs:comment """Description:
+Synonyms to the preferred name
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 7.7
+
+Type: String with lower and upper case, with a maximum of 70 characters
+
+Poposed Data Range Expression: xsd:string[maxLength 70]""" .
+
+
+### Unit_of_Measure
+DINEN61360:Unit_of_Measure rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain DINEN61360:Type_Description ;
+                           rdfs:comment """Description:
+Defines the unit of measure for a data element (e.g. km/h)
+
+Liability: case dependend, checked by SWRL rule 2
+
+DIN EN 61360-1:2018 Section 10.7
+
+Type: This data property represents the unit of measure, which should be ISO 31 compliant (SI-Units)
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Value
+DINEN61360:Value rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain [ owl:intersectionOf ( DINEN61360:Instance_Description
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty DINEN61360:Instance_Description_has_Type ;
+                                                      owl:allValuesFrom DINEN61360:Simple_Data_Type
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+                 rdfs:comment """Description:
+
+The actual value of something being described.
+
+Liability: Necessary
+
+SemAnz40
+
+Type: This data property represents the value of the data element, which is a string, while the actual data type is represented by the Data Property DataType (!)
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Value_Format_Field_length
+DINEN61360:Value_Format_Field_length rdf:type owl:DatatypeProperty ;
+                                     rdfs:subPropertyOf owl:topDataProperty ;
+                                     rdfs:domain DINEN61360:Type_Description ;
+                                     rdfs:comment """Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the field length, since this could be exponential (expressed with an E), it is a string
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Value_Format_Field_length_Variable
+DINEN61360:Value_Format_Field_length_Variable rdf:type owl:DatatypeProperty ;
+                                              rdfs:subPropertyOf owl:topDataProperty ;
+                                              rdfs:domain DINEN61360:Type_Description ;
+                                              rdfs:comment """Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the case, that a value format has a variable field length (true)
+
+Poposed Data Range Expression: xsd:boolean""" .
+
+
+### Value_Format_non-quantitativ
+DINEN61360:Value_Format_non-quantitativ rdf:type owl:DatatypeProperty ;
+                                        rdfs:subPropertyOf owl:topDataProperty ;
+                                        rdfs:domain DINEN61360:Type_Description ;
+                                        rdfs:range [ rdf:type rdfs:Datatype ;
+                                                     owl:oneOf [ rdf:type rdf:List ;
+                                                                 rdf:first "A" ;
+                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                            rdf:first "B" ;
+                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                       rdf:first "M" ;
+                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                  rdf:first "N" ;
+                                                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                                                             rdf:first "X" ;
+                                                                                                             rdf:rest rdf:nil
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                   ] ;
+                                        owl:propertyDisjointWith DINEN61360:Value_Format_quantitativ ;
+                                        rdfs:comment """Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the non-quantitativ formats, string
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Value_Format_quantitativ
+DINEN61360:Value_Format_quantitativ rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf owl:topDataProperty ;
+                                    rdfs:domain DINEN61360:Type_Description ;
+                                    rdfs:range [ rdf:type rdfs:Datatype ;
+                                                 owl:oneOf [ rdf:type rdf:List ;
+                                                             rdf:first "NR1" ;
+                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                        rdf:first "NR2" ;
+                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                   rdf:first "NR3" ;
+                                                                                   rdf:rest rdf:nil
+                                                                                 ]
+                                                                      ]
+                                                           ]
+                                               ] ;
+                                    rdfs:comment """Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the quantitativ formats, string
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Value_List
+DINEN61360:Value_List rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:domain DINEN61360:Simple_Data_Type ;
+                      rdfs:comment """Description: 
+Represents the possible values for a data element
+
+Liability: optional (in DIN613060 case depended due to classification of data element, which is not implemented here)
+
+DIN EN 61360-1:2018 Section 16
+
+Type: This data property represents the information, if there is a value list (if so, true), basically the values that the data property \"Value\" is allowed to hold. 
+
+Poposed Data Range Expression: xsd:boolean""" .
+
+
+### Value_List_Member
+DINEN61360:Value_List_Member rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf owl:topDataProperty ;
+                             rdfs:domain DINEN61360:Simple_Data_Type ;
+                             rdfs:comment """Description: 
+Represents the possible values for a data element
+
+Liability: optional (in DIN613060 case depended due to classification of data element, which is not implemented here)
+
+DIN EN 61360-1:2018 Section 16
+
+Type: This data property represents the one (!) member of the value list, violation may result in inconsistency, since the compliance of value list and value is checked by SWRL rule 3. 
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### Version_Number
+DINEN61360:Version_Number rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdfs:domain DINEN61360:Type_Description ;
+                          rdfs:comment """Description:
+Number that indicates different versions of one data element type
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.8
+
+Type: Integer with three digits max, so between 1 and 999
+
+Poposed Data Range Expression: xsd:integer[>= 1 , <= 999]""" .
+
+
+### backwards_compatible_Revision
+DINEN61360:backwards_compatible_Revision rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain DINEN61360:Type_Description ;
+                                         rdfs:comment """Description:
+Indicates, to which revisions the data type is backwards compatible.
+
+Type: Integer
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### backwards_compatible_Version
+DINEN61360:backwards_compatible_Version rdf:type owl:DatatypeProperty ;
+                                        rdfs:domain DINEN61360:Type_Description ;
+                                        rdfs:comment """Description:
+Indicates, to which version numbers the data type is backwards compatible.
+
+Type: Integer
+
+Poposed Data Range Expression: xsd:string""" .
+
+
+### longName
+VDI3682:longName rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:comment "A property that is used to give a long name to an individual." .
+
+
+### shortName
+VDI3682:shortName rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:comment "A property that is used to give a short name to an individual." .
+
+
+### hasDefaultValue
+:hasDefaultValue rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SkillVariable .
+
+
+### hasOptionValue
+:hasOptionValue rdf:type owl:DatatypeProperty ;
+                rdfs:domain :SkillVariable .
+
+
+### hasVariableName
+:hasVariableName rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SkillVariable .
+
+
+### hasVariableType
+:hasVariableType rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SkillVariable .
+
+
+### isRequired
+:isRequired rdf:type owl:DatatypeProperty ;
+            rdfs:domain :SkillVariable .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+### Application
+<http://openmath.org/vocab/math#Application> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://openmath.org/vocab/math#Compound> ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#arguments> ;
+                                                               owl:allValuesFrom <http://openmath.org/vocab/math#ObjectList>
+                                                             ] ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#operator> ;
+                                                               owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                             ] ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#operator> ;
+                                                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                             ] ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#arguments> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ] ;
+                                             rdfs:comment "Constructs an OpenMath object from a sequence of one or more OpenMath objects. The first child of an application is referred to as its \"head\" while the remaining objects are called its \"arguments\".  An OpenMath application object can be used to convey the mathematical notion of application of a function to a set of arguments." .
+
+
+### Attribution
+<http://openmath.org/vocab/math#Attribution> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://openmath.org/vocab/math#Compound> ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#arguments> ;
+                                                               owl:allValuesFrom <http://openmath.org/vocab/math#AttributionList>
+                                                             ] ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#target> ;
+                                                               owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                             ] ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#target> ;
+                                                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                             ] ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://openmath.org/vocab/math#arguments> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ] ;
+                                             rdfs:comment """Decorates an object with a sequence of one or more pairs made up of an OpenMath symbol, the \"attribute\", and an associated  object, the \"value of the attribute\". The value of the attribute can be an OpenMath attribution object itself. As an example of this, consider the OpenMath objects representing groups, automorphism groups, and group dimensions. It is then possible to attribute an OpenMath object representing a group by its automorphism group, itself attributed by its dimension.
+
+OpenMath objects can be attributed with OpenMath foreign objects, which are containers for non-OpenMath structures. For example a mathematical expression could be attributed with its spoken or visual rendering.""" .
+
+
+### AttributionList
+<http://openmath.org/vocab/math#AttributionList> rdf:type owl:Class ;
+                                                 rdfs:subClassOf rdf:List ;
+                                                 rdfs:comment "A list of attribute-value pairs." .
+
+
+### Binding
+<http://openmath.org/vocab/math#Binding> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://openmath.org/vocab/math#Compound> ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://openmath.org/vocab/math#binder> ;
+                                                           owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://openmath.org/vocab/math#body> ;
+                                                           owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://openmath.org/vocab/math#variables> ;
+                                                           owl:allValuesFrom <http://openmath.org/vocab/math#VariableList>
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://openmath.org/vocab/math#binder> ;
+                                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://openmath.org/vocab/math#body> ;
+                                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://openmath.org/vocab/math#variables> ;
+                                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ;
+                                         rdfs:comment "A variable binding that is constructed from an OpenMath object, and from a sequence of zero or more variables followed by another OpenMath object.  The binding consits of a \"binder\" object, the \"body\" and the \"variables\" to be bound in the \"body\". It is allowed to have no bound variables, but the binder object and the body should be present. Binding can be used to express functions or logical statements." .
+
+
+### Compound
+<http://openmath.org/vocab/math#Compound> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://openmath.org/vocab/math#Object> ;
+                                          rdfs:comment "An object that is composed of some other mathematical objects." .
+
+
+### Error
+<http://openmath.org/vocab/math#Error> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://openmath.org/vocab/math#Compound> ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://openmath.org/vocab/math#arguments> ;
+                                                         owl:allValuesFrom <http://openmath.org/vocab/math#ObjectList>
+                                                       ] ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://openmath.org/vocab/math#symbol> ;
+                                                         owl:allValuesFrom <http://openmath.org/vocab/math#Symbol>
+                                                       ] ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://openmath.org/vocab/math#symbol> ;
+                                                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                       ] ;
+                                       rdfs:comment "Represents error objects which are made up of an OpenMath symbol and a sequence of zero or more OpenMath objects. This object has no direct mathematical meaning.  Errors occur as the result of some treatment on an OpenMath object and are thus of real interest only when some sort of communication is taking place. Errors may occur inside other objects and also inside other errors. Error objects might consist only of a symbol as in the object: error (S)." .
+
+
+### Literal
+<http://openmath.org/vocab/math#Literal> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://openmath.org/vocab/math#Object> ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://openmath.org/vocab/math#value> ;
+                                                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                         ] ;
+                                         rdfs:comment "An OpenMath literal (integer, float, character string, bytearray)." .
+
+
+### Object
+<http://openmath.org/vocab/math#Object> rdf:type owl:Class ;
+                                        rdfs:subClassOf owl:Thing ;
+                                        rdfs:comment "Component of a mathematical expression." .
+
+
+### ObjectList
+<http://openmath.org/vocab/math#ObjectList> rdf:type owl:Class ;
+                                            owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty rdf:first ;
+                                                                                         owl:someValuesFrom <http://openmath.org/vocab/math#Object>
+                                                                                       ]
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty rdf:rest ;
+                                                                                         owl:someValuesFrom <http://openmath.org/vocab/math#ObjectList>
+                                                                                       ]
+                                                                                     ) ;
+                                                                  rdf:type owl:Class
+                                                                ] ;
+                                            rdfs:subClassOf rdf:List ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty rdf:first ;
+                                                              owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                            ] ;
+                                            rdfs:comment "A list of mathematical objects." .
+
+
+### Reference
+<http://openmath.org/vocab/math#Reference> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://openmath.org/vocab/math#Object> ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty <http://openmath.org/vocab/math#target> ;
+                                                             owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                           ] ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty <http://openmath.org/vocab/math#target> ;
+                                                             owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                           ] .
+
+
+### Symbol
+<http://openmath.org/vocab/math#Symbol> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://openmath.org/vocab/math#Object> ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <http://openmath.org/vocab/math/meta#example> ;
+                                                          owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <http://openmath.org/vocab/math/meta#formalProperty> ;
+                                                          owl:allValuesFrom <http://openmath.org/vocab/math#Object>
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty rdfs:isDefinedBy ;
+                                                          owl:allValuesFrom <http://openmath.org/vocab/math/meta#Library>
+                                                        ] ;
+                                        rdfs:comment "Symbols are uniquely defined by the Content Dictionary in which they occur and by a name. Each symbol has no more than one definition in a Content Dictionary. Many Content Dictionaries may define differently a symbol with the same name (e.g. the symbol union is defined as associative-commutative set theoretic union in a Content Dictionary set1 but another Content Dictionary, multiset1 might define a symbol union as the union of multi-sets)." .
+
+
+### Variable
+<http://openmath.org/vocab/math#Variable> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://openmath.org/vocab/math#Object> ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <http://openmath.org/vocab/math#name> ;
+                                                            owl:allValuesFrom xsd:string
+                                                          ] ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <http://openmath.org/vocab/math#name> ;
+                                                            owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                          ] ;
+                                          rdfs:comment "Denote parameters, variables or indeterminates (such as bound variables of function definitions, variables in summations and integrals, independent variables of derivatives)." .
+
+
+### VariableList
+<http://openmath.org/vocab/math#VariableList> rdf:type owl:Class ;
+                                              owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty rdf:first ;
+                                                                                           owl:someValuesFrom <http://openmath.org/vocab/math#Variable>
+                                                                                         ]
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty rdf:rest ;
+                                                                                           owl:someValuesFrom <http://openmath.org/vocab/math#Variable>
+                                                                                         ]
+                                                                                       ) ;
+                                                                    rdf:type owl:Class
+                                                                  ] ;
+                                              rdfs:subClassOf rdf:List ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty rdf:first ;
+                                                                owl:allValuesFrom <http://openmath.org/vocab/math#Variable>
+                                                              ] ;
+                                              rdfs:comment "A list of variables." .
+
+
+### ApplicationSymbol
+<http://openmath.org/vocab/math/meta#ApplicationSymbol> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://openmath.org/vocab/math#Symbol> ;
+                                                        rdfs:comment "The symbol may appear as the first child of an OpenMath application object." .
+
+
+### AttributionSymbol
+<http://openmath.org/vocab/math/meta#AttributionSymbol> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://openmath.org/vocab/math#Symbol> ;
+                                                        rdfs:comment """The symbol may be used as key in an OpenMath attribution object, i.e. as the first element of a (key, value) pair, or in an equivalent context (for example to refer to the value of an attribution).  This form of attribution
+may be ignored by an application, so should be used for information which does not change the meaning of the attributed OpenMath object.""" .
+
+
+### BinderSymbol
+<http://openmath.org/vocab/math/meta#BinderSymbol> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://openmath.org/vocab/math#Symbol> ;
+                                                   rdfs:comment "The symbol may appear as the first child of an OpenMath binding object." .
+
+
+### ConstantSymbol
+<http://openmath.org/vocab/math/meta#ConstantSymbol> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://openmath.org/vocab/math#Symbol> ;
+                                                     rdfs:comment "The symbol cannot be used to construct an OpenMath compound object." .
+
+
+### ErrorSymbol
+<http://openmath.org/vocab/math/meta#ErrorSymbol> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://openmath.org/vocab/math#Symbol> ;
+                                                  rdfs:comment "The symbol may appear as the first child of an OpenMath error object." .
+
+
+### Library
+<http://openmath.org/vocab/math/meta#Library> rdf:type owl:Class ;
+                                              rdfs:comment "Represents a collection of related OpenMath symbols." .
+
+
+### SemanticAttributionSymbol
+<http://openmath.org/vocab/math/meta#SemanticAttributionSymbol> rdf:type owl:Class ;
+                                                                rdfs:subClassOf <http://openmath.org/vocab/math#Symbol> ;
+                                                                rdfs:comment "This is the same as attribution except that it modifies the meaning of the attributed OpenMath object and thus cannot be ignored by an application, without changing the meaning." .
+
+
+### Array
+DINEN61360:Array rdf:type owl:Class ;
+                 rdfs:subClassOf DINEN61360:Complex_Data_Type ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty DINEN61360:complex_Data_Type_has_Member ;
+                                   owl:allValuesFrom DINEN61360:Array_Member
+                                 ] .
+
+
+### Array_Member
+DINEN61360:Array_Member rdf:type owl:Class ;
+                        rdfs:subClassOf DINEN61360:Complex_Data_Type_Member ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty DINEN61360:Array_Member_Dimension ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onDataRange xsd:int
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty DINEN61360:Array_Member_Position ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onDataRange xsd:int
+                                        ] .
+
+
+### Bag
+DINEN61360:Bag rdf:type owl:Class ;
+               rdfs:subClassOf DINEN61360:Complex_Data_Type ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty DINEN61360:complex_Data_Type_has_Member ;
+                                 owl:allValuesFrom DINEN61360:Bag_Member
+                               ] .
+
+
+### Bag_Member
+DINEN61360:Bag_Member rdf:type owl:Class ;
+                      rdfs:subClassOf DINEN61360:Complex_Data_Type_Member .
+
+
+### Boolean
+DINEN61360:Boolean rdf:type owl:Class ;
+                   rdfs:subClassOf DINEN61360:Simple_Data_Type ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty DINEN61360:Value_List_Member ;
+                                     owl:allValuesFrom xsd:boolean
+                                   ] .
+
+
+### Complex_Data_Type
+DINEN61360:Complex_Data_Type rdf:type owl:Class ;
+                             rdfs:subClassOf DINEN61360:Data_Type ;
+                             owl:disjointWith DINEN61360:Simple_Data_Type .
+
+
+### Complex_Data_Type_Member
+DINEN61360:Complex_Data_Type_Member rdf:type owl:Class ;
+                                    rdfs:subClassOf DINEN61360:Data_Type .
+
+
+### Data_Element
+DINEN61360:Data_Element rdf:type owl:Class ;
+                        rdfs:subClassOf CSS:Property ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty DINEN61360:has_Type_Description ;
+                                          owl:someValuesFrom DINEN61360:Type_Description
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty DINEN61360:has_Instance_Description ;
+                                          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                          owl:onClass DINEN61360:Instance_Description
+                                        ] ;
+                        owl:disjointWith DINEN61360:Type_Description ;
+                        rdfs:comment """Description:
+Contains a the structure of all data element (DIN61360 3.5.2, see also section 4)
+
+Each Data_Element has to have a type description and may have an instance description""" .
+
+
+### Data_Type
+DINEN61360:Data_Type rdf:type owl:Class .
+
+
+### Instance_Description
+DINEN61360:Instance_Description rdf:type owl:Class ;
+                                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                  owl:onProperty DINEN61360:Expression_Goal ;
+                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onDataRange xsd:string
+                                                ] ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty DINEN61360:Logic_Interpretation ;
+                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onDataRange xsd:string
+                                                ] ;
+                                owl:disjointWith DINEN61360:Type_Description .
+
+
+### Integer
+DINEN61360:Integer rdf:type owl:Class ;
+                   rdfs:subClassOf DINEN61360:Simple_Data_Type ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty DINEN61360:Value_List_Member ;
+                                     owl:allValuesFrom xsd:int
+                                   ] .
+
+
+### List
+DINEN61360:List rdf:type owl:Class ;
+                rdfs:subClassOf DINEN61360:Complex_Data_Type ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty DINEN61360:complex_Data_Type_has_Member ;
+                                  owl:allValuesFrom DINEN61360:List_Member
+                                ] .
+
+
+### List_Member
+DINEN61360:List_Member rdf:type owl:Class ;
+                       rdfs:subClassOf DINEN61360:Complex_Data_Type_Member ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty DINEN61360:List_Member_Position ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onDataRange xsd:int
+                                       ] .
+
+
+### Real
+DINEN61360:Real rdf:type owl:Class ;
+                rdfs:subClassOf DINEN61360:Simple_Data_Type ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty DINEN61360:Value_List_Member ;
+                                  owl:allValuesFrom xsd:float
+                                ] .
+
+
+### Set
+DINEN61360:Set rdf:type owl:Class ;
+               rdfs:subClassOf DINEN61360:Complex_Data_Type ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty DINEN61360:complex_Data_Type_has_Member ;
+                                 owl:allValuesFrom DINEN61360:Set_Member
+                               ] .
+
+
+### Set_Member
+DINEN61360:Set_Member rdf:type owl:Class ;
+                      rdfs:subClassOf DINEN61360:Complex_Data_Type_Member .
+
+
+### Simple_Data_Type
+DINEN61360:Simple_Data_Type rdf:type owl:Class ;
+                            rdfs:subClassOf DINEN61360:Data_Type ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Value_List ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:boolean
+                                            ] ;
+                            rdfs:comment """Description:
+Indicates which kind of DataType a data element must be. This does not include all data types of DIN61360! 
+
+Liability: Necessary
+
+DIN61360: 3.4.1
+
+Type: is a enumeration of standard compliant data types. Please see DIN61360 for a description of level/class-instance/list/set/bag/array""" .
+
+
+### String
+DINEN61360:String rdf:type owl:Class ;
+                  rdfs:subClassOf DINEN61360:Simple_Data_Type ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty DINEN61360:Value_List_Member ;
+                                    owl:allValuesFrom xsd:string
+                                  ] .
+
+
+### Type_Description
+DINEN61360:Type_Description rdf:type owl:Class ;
+                            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Code ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:string
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Definition ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:string
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Preferred_Name ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:string
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Short_Name ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:string
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Version_Number ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:int
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Preferred_Letter_Symbol ;
+                                              owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:string
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Synonymous_Letter_Symbol ;
+                                              owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:string
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty DINEN61360:Synonymous_Name ;
+                                              owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                              owl:onDataRange xsd:string
+                                            ] ;
+                            rdfs:comment "Value list is expressed as exactly 1, since not using a value list has to result in value list false" .
+
+
+### Command
+ISA88:Command rdf:type owl:Class ;
+              rdfs:subClassOf :StatefulMethod .
+
+
+### State
+ISA88:State rdf:type owl:Class .
+
+
+### StateMachine
+ISA88:StateMachine rdf:type owl:Class ;
+                   rdfs:subClassOf CSS:StateMachine .
+
+
+### Transition
+ISA88:Transition rdf:type owl:Class .
+
+
+### Energy
+VDI2206:Energy rdf:type owl:Class ;
+               owl:equivalentClass VDI3682:Energy .
+
+
+### Information
+VDI2206:Information rdf:type owl:Class ;
+                    owl:equivalentClass VDI3682:Information .
+
+
+### Module
+VDI2206:Module rdf:type owl:Class ;
+               rdfs:subClassOf VDI3682:TechnicalResource .
+
+
+### Product
+VDI2206:Product rdf:type owl:Class ;
+                owl:equivalentClass VDI3682:Product ,
+                                    CSS:Product .
+
+
+### System
+VDI2206:System rdf:type owl:Class ;
+               rdfs:subClassOf VDI3682:TechnicalResource .
+
+
+### List
+rdf:List rdf:type owl:Class .
+
+
+### Thing
+owl:Thing rdfs:comment """In order to check consistency, the following procedure is used:
+
+First, the reasoner checks, whether the class expressions to hold for the ABox. If that is not the case, then a explanation of inconsistency can be accessed.
+
+Second, SWRL rules are used to check the constency aspects that cannot be modelled through class expressions. These rules infer 4 \"Overall_X_Constent\" DataProperties. For the case that incremental rules were possible, other consistency attributes are inferred, so that in case of inconsistency a debugging can be started.
+
+Explanation to class expressions in relation to DIN61360 definitions:
+
+\"exactly\" is used for \"necessary\" (zwingend)
+\"max\" is used for \"optinal\" (wahlfrei) with maximum restriction
+
+If something is just \"optional\", it will not occur in the class expression.
+
+If a liability in DIN61360 states \"case dependend\" (bedingt), then this considered in a SWRL rule, which will give the DataProperties of \"x_Consistent\" to the Data_Element""" .
+
+
+### Attribute
+VDI3682:Attribute rdf:type owl:Class ;
+                  owl:disjointWith VDI3682:Process ,
+                                   VDI3682:ProcessOperator ,
+                                   VDI3682:State ,
+                                   VDI3682:SystemLimit ,
+                                   VDI3682:TechnicalResource .
+
+
+### Characteristic
+VDI3682:Characteristic rdf:type owl:Class ;
+                       rdfs:subClassOf VDI3682:Attribute ;
+                       owl:disjointWith VDI3682:Identification .
+
+
+### Energy
+VDI3682:Energy rdf:type owl:Class ;
+               rdfs:subClassOf VDI3682:State ;
+               rdfs:comment "Energy is requiered by the process operator to fullfill the process. Energy is Input and Output of a process. Energy can be any kind of energy, exp.: electricity, heat,..." .
+
+
+### Identification
+VDI3682:Identification rdf:type owl:Class ;
+                       rdfs:subClassOf VDI3682:Attribute .
+
+
+### Information
+VDI3682:Information rdf:type owl:Class ;
+                    rdfs:subClassOf VDI3682:State ;
+                    rdfs:comment """Information input for a process operator can be any kind of information required to fullfill the process. Information output can be any kind of information created by the process.
+[VDI 3682-1]""" .
+
+
+### Process
+VDI3682:Process rdf:type owl:Class ;
+                owl:equivalentClass CSS:Process ;
+                owl:disjointWith VDI3682:State ,
+                                 VDI3682:SystemLimit ,
+                                 VDI3682:TechnicalResource ;
+                rdfs:comment """A process describes the desired behavior of a process operator, by means of a solution neutral description of inputs and outputs. Products,energies  and information are converted into new products,energies  and information by a process operator. The process operator implements this conversion with the help of technical resources.
+[VDI3682-1]
+
+Note that a process may have inputs and outputs. These are inputs / outputs that are on the system limit of this process.""" .
+
+
+### ProcessOperator
+VDI3682:ProcessOperator rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty VDI3682:hasInput ;
+                                                                     owl:someValuesFrom owl:Thing
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty VDI3682:hasOutput ;
+                                                                     owl:someValuesFrom owl:Thing
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty [ owl:inverseOf VDI3682:consistsOf
+                                                                                    ] ;
+                                                                     owl:someValuesFrom VDI3682:Process
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty VDI3682:hasInput ;
+                                                                 owl:someValuesFrom owl:Thing
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty VDI3682:hasOutput ;
+                                                                 owl:someValuesFrom owl:Thing
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                        owl:disjointWith VDI3682:State ,
+                                         VDI3682:SystemLimit ,
+                                         VDI3682:TechnicalResource ;
+                        rdfs:comment """One step of a process that transfers a status \"before\" (i.e., an input) to a status \"after\" (i.e., an output). 
+Everything that has an input and an output may be a process operator (but could also be a process).
+Everything that has an input and an output AND is contained within a process is a process operator.""" .
+
+
+### Product
+VDI3682:Product rdf:type owl:Class ;
+                rdfs:subClassOf VDI3682:State ;
+                rdfs:comment """A rather generic concepts to describe all sorts of raw, intermediate or final products. Can also be used to describe flow of materials.
+[VDI 3682-1]""" .
+
+
+### State
+VDI3682:State rdf:type owl:Class ;
+              owl:disjointWith VDI3682:SystemLimit ,
+                               VDI3682:TechnicalResource ;
+              rdfs:comment """A State describes the actual state of a Product/Energy/Information. Exp.: status ante operationem and status post operationem.
+[VDI3682-1]""" .
+
+
+### SystemLimit
+VDI3682:SystemLimit rdf:type owl:Class ;
+                    owl:disjointWith VDI3682:TechnicalResource ;
+                    rdfs:comment """The system limit determines the observation horizon of the process. In a broader sense, this can also be seen as the balance limit for incoming products/energy/information and outgoing products/energy/information.
+[VDI 3682-1]""" .
+
+
+### TechnicalResource
+VDI3682:TechnicalResource rdf:type owl:Class ;
+                          rdfs:subClassOf CSS:Resource ;
+                          rdfs:comment """The technical resource is able to implement certain processes and is an abstract description of a system.
+[VDI 3682-1]""" .
+
+
+### CurrentStateOutput
+:CurrentStateOutput rdf:type owl:Class ;
+                    rdfs:subClassOf :SkillOutput ;
+                    rdfs:comment "May be used to get the current state as an integer value" .
+
+
+### GetOutputs
+:GetOutputs rdf:type owl:Class ;
+            rdfs:subClassOf :StatelessMethod .
+
+
+### ProvidedCapability
+:ProvidedCapability rdf:type owl:Class ;
+                    rdfs:subClassOf CSS:Capability .
+
+
+### RequiredCapability
+:RequiredCapability rdf:type owl:Class ;
+                    rdfs:subClassOf CSS:Capability .
+
+
+### SetParameters
+:SetParameters rdf:type owl:Class ;
+               rdfs:subClassOf :StatelessMethod .
+
+
+### SkillCommand
+:SkillCommand rdf:type owl:Class ;
+              rdfs:subClassOf CSS:SkillParameter ;
+              rdfs:comment "May be used to invoke a transition with a numerical value" .
+
+
+### SkillMethod
+:SkillMethod rdf:type owl:Class ;
+             rdfs:comment "Abstract concept of a method to invoke a skill. Needs to be implemented and modeled in detail for a specific technology" .
+
+
+### SkillOutput
+:SkillOutput rdf:type owl:Class ;
+             rdfs:subClassOf :SkillVariable ;
+             rdfs:comment "May be used to retrieve results during or after Skill execution" .
+
+
+### SkillVariable
+:SkillVariable rdf:type owl:Class ;
+               rdfs:comment """A super class for various types of Skill variables: 
+- SkillCommand: Allows to control a skill via a numeric command value
+- SkillParameter: Allows to parameterize a Skill execution
+- SkillOutput: Allows to retrieve results from a Skill""" .
+
+
+### StatefulMethod
+:StatefulMethod rdf:type owl:Class ;
+                rdfs:subClassOf :SkillMethod .
+
+
+### StatelessMethod
+:StatelessMethod rdf:type owl:Class ;
+                 rdfs:subClassOf :SkillMethod .
+
+
+### Capability
+CSS:Capability rdf:type owl:Class ;
+               owl:disjointWith CSS:Resource ,
+                                CSS:ServiceOffer ,
+                                CSS:ServiceProvider ,
+                                CSS:ServiceRequester ,
+                                CSS:Skill ,
+                                CSS:SkillInterface ,
+                                CSS:SkillParameter ;
+               rdfs:comment """Implementation-independent specification of a function in industrial production to achieve an effect in the physical or virtual world.
+
+Notes:
+- A capability can be restricted by constraints.
+- A capability can be specified by capability properties.
+- A capability can be realized by skills""" .
+
+
+### CapabilityConstraint
+CSS:CapabilityConstraint rdf:type owl:Class ;
+                         owl:equivalentClass [ owl:intersectionOf ( <http://openmath.org/vocab/math#Application>
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty [ owl:inverseOf CSS:isRestrictedBy
+                                                                                     ] ;
+                                                                      owl:someValuesFrom CSS:Capability
+                                                                    ]
+                                                                  ) ;
+                                               rdf:type owl:Class
+                                             ] ;
+                         owl:disjointWith CSS:Resource ,
+                                          CSS:Service ,
+                                          CSS:ServiceOffer ,
+                                          CSS:ServiceProvider ,
+                                          CSS:ServiceRequester ,
+                                          CSS:Skill ,
+                                          CSS:SkillInterface ,
+                                          CSS:SkillParameter ;
+                         rdfs:comment """Condition imposed on a capability that further details its applicability. 
+
+Notes:
+- A capability constraint can be formulated as one of the following three constraint types:
+▪ A precondition, i.e., a condition that must hold before a function can be executed.
+▪ A postcondition, i.e., a condition that must hold after a function has been executed.
+▪ An invariant, i.e., a condition that must hold during the execution of a
+function.
+- A capability constraint restricts the values of the properties associated with the respective capability.
+- A capability constraint can involve one or more properties""" .
+
+
+### Process
+CSS:Process rdf:type owl:Class ;
+            owl:disjointWith CSS:Resource ,
+                             CSS:Service ,
+                             CSS:ServiceOffer ,
+                             CSS:ServiceProvider ,
+                             CSS:Skill ,
+                             CSS:SkillInterface ,
+                             CSS:SkillParameter ;
+            rdfs:comment """Production-relevant activity at any level of granularity that might affect materials and is performed by resources.
+
+Notes:
+- In general, a process can be decomposed into sub-processes or single activities.
+- A process can require capabilities to express that any suitable resource used for
+performing this process needs to provide compatible capabilities.
+- A process step relates to materials that constitute either input or output for the processing in this step""" .
+
+
+### Product
+CSS:Product rdf:type owl:Class ;
+            owl:disjointWith CSS:Service ,
+                             CSS:ServiceOffer ,
+                             CSS:ServiceProvider ,
+                             CSS:ServiceRequester ,
+                             CSS:Skill ,
+                             CSS:SkillInterface ,
+                             CSS:SkillParameter ;
+            rdfs:comment """Physical object being used as an input or created as an output of a production process.
+
+Notes:
+- The term Product may be used for objects in various states of manufacturing and may be seen as a generic term for raw materials, work in process and finished goods. Consumable supplies such as fuel, lubricants or cleaning agents may also be regarded as products. Furthermore, both purchased parts as well as parts manufactured in-house may be regarded as products.
+- Besides the actual product, there can be additional artifacts related to that product that are created and used in different life cycle phases to specify the product.
+▪ 3D/CAD models
+▪ specifications
+▪ BOM
+- A Service Requester may use these additional artifacts to formulate requirements against products.""" .
+
+
+### Property
+CSS:Property rdf:type owl:Class ;
+             owl:disjointWith CSS:Resource ,
+                              CSS:Service ,
+                              CSS:ServiceOffer ,
+                              CSS:ServiceProvider ,
+                              CSS:ServiceRequester ,
+                              CSS:Skill ,
+                              CSS:SkillInterface ;
+             rdfs:comment """Quality or characteristic inherent in or ascribed to any CSS model element
+
+Notes:
+- Properties may be used to describe and differentiate all kinds of PPR entities (i.e., products, process steps, resources)
+- Capabilities, services and offers are specified by properties in order to detail their description with regard to certain entities (e.g. products, process steps, resources)""" .
+
+
+### Resource
+CSS:Resource rdf:type owl:Class ;
+             owl:disjointWith CSS:Service ,
+                              CSS:ServiceOffer ,
+                              CSS:Skill ,
+                              CSS:SkillInterface ,
+                              CSS:SkillParameter ,
+                              CSS:StateMachine ;
+             rdfs:comment """Entity capable of performing functions specified as Capabilities and potentially implemented as Skills.
+
+Notes
+- A production resource may consist of hardware, software or both
+- A production resource may only provide capabilities (i.e. when engineering a resource, for planning purposes) and may additionally provide skills for automatic execution of the specified function.
+- A human becomes a Production Resource, if that person is able to perform a function specified as a capability.""" .
+
+
+### Service
+CSS:Service rdf:type owl:Class ;
+            owl:disjointWith CSS:ServiceOffer ,
+                             CSS:ServiceProvider ,
+                             CSS:ServiceRequester ,
+                             CSS:Skill ,
+                             CSS:SkillInterface ,
+                             CSS:SkillParameter ,
+                             CSS:StateMachine ;
+            rdfs:comment """Description of the commercial aspects and means of provision of offered capabilities.
+
+Notes:
+- The term “service�? should be understood in the sense of economics and shall not be confused with e.g., web services.
+- The capabilities and means of provisions are specified by properties
+- A service is demanded by service requesters and provided by a service provider
+- A service is an input for an offer proposed by""" .
+
+
+### ServiceOffer
+CSS:ServiceOffer rdf:type owl:Class ;
+                 owl:disjointWith CSS:ServiceProvider ,
+                                  CSS:ServiceRequester ,
+                                  CSS:Skill ,
+                                  CSS:SkillInterface ,
+                                  CSS:SkillParameter ,
+                                  CSS:StateMachine ;
+                 rdfs:comment """Proposal for a binding contract from the Service Provider to execute one or more particular services that a ServiceRequester can receive and accept.
+
+Notes:
+- A ServiceOffer should determine the commercial aspects of the service provision
+and may remain valid for a certain period of time.
+- An Offer may consist of partial offers proposed by different service providers""" .
+
+
+### ServiceProvider
+CSS:ServiceProvider rdf:type owl:Class ;
+                    owl:disjointWith CSS:Skill ,
+                                     CSS:SkillInterface ,
+                                     CSS:SkillParameter ,
+                                     CSS:StateMachine ;
+                    rdfs:comment "Provides Services and can propose ServiceOffers to ServiceRequesters." .
+
+
+### ServiceRequester
+CSS:ServiceRequester rdf:type owl:Class ;
+                     owl:disjointWith CSS:Skill ,
+                                      CSS:SkillInterface ,
+                                      CSS:SkillParameter ,
+                                      CSS:StateMachine ;
+                     rdfs:comment """Demands Services under particular commercial aspects by providing either a specification of
+services or a specification of product requirements.""" .
+
+
+### Skill
+CSS:Skill rdf:type owl:Class ;
+          owl:disjointWith CSS:SkillParameter ;
+          rdfs:comment """Executable implementation of an encapsulated (automation) function specified by a Capability.
+
+Notes:
+- A skill must have a skill interface. 
+- One capability can be realized by more than one skill. 
+- A skill may have any number of SkillParameters. 
+- A skill’s behavior conforms to a state machine. 
+- A skill controls a process step""" .
+
+
+### SkillInterface
+CSS:SkillInterface rdf:type owl:Class ;
+                   owl:disjointWith CSS:SkillParameter ,
+                                    CSS:StateMachine ;
+                   rdfs:comment """Access point to configure, control and monitor a skill.
+
+Notes:
+- A skill interface exposes interaction points to be used by other external systems
+(e.g. MES, other skills).
+- A skill interface exposes the state machine of a skill so that skill states can be
+monitored and transitions triggered.
+- A skill interface exposes the parameters of a skill so that they can be written and read.""" .
+
+
+### SkillParameter
+CSS:SkillParameter rdf:type owl:Class ;
+                   rdfs:subClassOf :SkillVariable ;
+                   owl:disjointWith CSS:StateMachine ;
+                   rdfs:comment """Data unit to configure, control and monitor the execution of a skill.
+
+Notes:
+- Skill parameters might be used as in- /output parameters
+- Skill parameters might be used as results
+- Skill parameters might have a relation or be equivalent to capability properties""" .
+
+
+### StateMachine
+CSS:StateMachine rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.openmath.org/cd/arith1
+<http://www.openmath.org/cd/arith1> rdf:type owl:NamedIndividual ,
+                                             <http://openmath.org/vocab/math/meta#Library> ;
+                                    <http://openmath.org/vocab/math/meta#description> "This CD defines symbols for common arithmetic functions." ;
+                                    rdfs:comment """This document is distributed in the hope that it will be useful, 
+     but WITHOUT ANY WARRANTY; without even the implied warranty of 
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+     The copyright holder grants you permission to redistribute this 
+     document freely as a verbatim copy. Furthermore, the copyright
+     holder permits you to develop any derived work from this document
+     provided that the following conditions are met.
+       a) The derived work acknowledges the fact that it is derived from
+          this document, and maintains a prominent reference in the 
+          work to the original source.
+       b) The fact that the derived work is not the original OpenMath 
+          document is stated prominently in the derived work.  Moreover if
+          both this document and the derived work are Content Dictionaries
+          then the derived work must include a different CDName element,
+          chosen so that it cannot be confused with any works adopted by
+          the OpenMath Society.  In particular, if there is a Content 
+          Dictionary Group whose name is, for example, `math' containing
+          Content Dictionaries named `math1', `math2' etc., then you should 
+          not name a derived Content Dictionary `mathN' where N is an integer.
+          However you are free to name it `private_mathN' or some such.  This
+          is because the names `mathN' may be used by the OpenMath Society
+          for future extensions.
+       c) The derived work is distributed under terms that allow the
+          compilation of derived works, but keep paragraphs a) and b)
+          intact.  The simplest way to do this is to distribute the derived
+          work under the OpenMath license, but this is not a requirement.
+     If you have questions about this license please contact the OpenMath
+     society at http://www.openmath.org.""" .
+
+
+### abs
+<http://www.openmath.org/cd/arith1#abs> rdf:type owl:NamedIndividual ,
+                                                 <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                        <http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "for all x,y | abs(x) + abs(y) >= abs(x+y)" ;
+<http://openmath.org/vocab/math/meta#description> """A unary operator which represents the absolute value of its
+argument. The argument should be numerically valued.
+In the complex case this is often referred to as the modulus.""" ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### divide
+<http://www.openmath.org/cd/arith1#divide> rdf:type owl:NamedIndividual ,
+                                                    <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                           <http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "whenever not(a=0) then a/a = 1" ;
+<http://openmath.org/vocab/math/meta#description> """This symbol represents a (binary) division function denoting the first argument
+right-divided by the second, i.e. divide(a,b)=a*inverse(b). It is the
+inverse of the multiplication function defined by the symbol times in this CD.""" ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### gcd
+<http://www.openmath.org/cd/arith1#gcd> rdf:type owl:NamedIndividual ,
+                                                 <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                        <http://openmath.org/vocab/math/meta#example> [ ] ;
+<http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> """for all integers a,b |
+There does not exist a c such that a/c is an Integer and b/c is an
+Integer and c > gcd(a,b).
+
+Note that this implies that gcd(a,b) > 0""" ;
+<http://openmath.org/vocab/math/meta#description> """The symbol to represent the n-ary function to return the gcd (greatest
+common divisor) of its arguments.""" ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### lcm
+<http://www.openmath.org/cd/arith1#lcm> rdf:type owl:NamedIndividual ,
+                                                 <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                        <http://openmath.org/vocab/math/meta#formalProperty> [ ] ,
+[ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> """for all integers a,b |
+There does not exist a c>0 such that c/a is an Integer and c/b is an
+Integer and lcm(a,b) > c.""" ,
+                                                        "lcm(a,b) = a*b/gcd(a,b)" ;
+<http://openmath.org/vocab/math/meta#description> """The symbol to represent the n-ary function to return the least common
+multiple of its arguments.""" ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### minus
+<http://www.openmath.org/cd/arith1#minus> rdf:type owl:NamedIndividual ,
+                                                   <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                          <http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "for all a,b | a - b = a + (-b)" ;
+<http://openmath.org/vocab/math/meta#description> """The symbol representing a binary minus function. This is equivalent to
+adding the additive inverse.""" ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### plus
+<http://www.openmath.org/cd/arith1#plus> rdf:type owl:NamedIndividual ,
+                                                  <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                         <http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "for all a,b | a + b = b + a" ;
+<http://openmath.org/vocab/math/meta#description> "The symbol representing an n-ary commutative function plus." ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### power
+<http://www.openmath.org/cd/arith1#power> rdf:type owl:NamedIndividual ,
+                                                   <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                          <http://openmath.org/vocab/math/meta#example> [ ] ,
+[ ] ;
+<http://openmath.org/vocab/math/meta#formalProperty> [ ] ,
+[ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> """if n is an integer then
+  x^0 = 1,
+  x^n = x * x^(n-1)""" ,
+                                                        "x\\in C implies x^a = exp(a ln x)" ;
+<http://openmath.org/vocab/math/meta#description> """This symbol represents a power function. The first argument is raised
+to the power of the second argument. When the second argument is not
+an integer, powering is defined in terms of exponentials and 
+logarithms for the complex and real numbers.
+This operator can represent general powering.""" ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### product
+<http://www.openmath.org/cd/arith1#product> rdf:type owl:NamedIndividual ,
+                                                     <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                            <http://openmath.org/vocab/math/meta#example> _:genid184 ;
+                                            <http://openmath.org/vocab/math/meta#description> """An operator taking two arguments, the first being the range of multiplication
+e.g. an integral interval, the second being the function to
+be multiplied. Note that the product may be over an infinite interval.""" ;
+                                            rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+_:genid184 rdf:type <http://openmath.org/vocab/math#Application> ;
+            <http://openmath.org/vocab/math#arguments> [ ] .
+
+
+### root
+<http://www.openmath.org/cd/arith1#root> rdf:type owl:NamedIndividual ,
+                                                  <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                         <http://openmath.org/vocab/math/meta#formalProperty> [ ] ,
+[ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "for all a,n | power(root(a,n),n) = a (if the root exists!)" ,
+                                                        "x\\in C implies root(x,n) = exp(ln(x)/n)" ;
+<http://openmath.org/vocab/math/meta#description> """A binary operator which represents its first argument \"lowered\" to its
+n'th root where n is the second argument. This is the inverse of the operation
+represented by the power symbol defined in this CD.
+
+Care should be taken as to the precise meaning of this operator, in
+particular which root is represented, however it is here to represent
+the general notion of taking n'th roots. As inferred by the signature
+relevant to this symbol, the function represented by this symbol is
+the single valued function, the specific root returned is the one
+indicated by the first CMP. Note also that the converse of the second
+CMP is not valid in general.""" ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### sub
+<http://www.openmath.org/cd/arith1#sub> rdf:type owl:NamedIndividual .
+
+
+### sum
+<http://www.openmath.org/cd/arith1#sum> rdf:type owl:NamedIndividual ,
+                                                 <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                        <http://openmath.org/vocab/math/meta#example> _:genid188 ;
+                                        <http://openmath.org/vocab/math/meta#description> """An operator taking two arguments, the first being the range of summation,
+e.g. an integral interval, the second being the function to be
+summed. Note that the sum may be over an infinite interval.""" ;
+                                        rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+_:genid188 rdf:type <http://openmath.org/vocab/math#Application> ;
+            <http://openmath.org/vocab/math#arguments> [ ] .
+
+
+### times
+<http://www.openmath.org/cd/arith1#times> rdf:type owl:NamedIndividual ,
+                                                   <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                          <http://openmath.org/vocab/math/meta#example> [ ] ;
+<http://openmath.org/vocab/math/meta#formalProperty> [ ] ,
+[ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "for all a,b | a * 0 = 0 and a * b = a * (b - 1) + a" ,
+                                                        "for all a,b,c | a*(b+c) = a*b + a*c" ;
+<http://openmath.org/vocab/math/meta#description> "The symbol representing an n-ary multiplication function." ;
+rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+
+### unary_minus
+<http://www.openmath.org/cd/arith1#unary_minus> rdf:type owl:NamedIndividual ,
+                                                         <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                                <http://openmath.org/vocab/math/meta#formalProperty> _:genid193 ;
+                                                <http://openmath.org/vocab/math/meta#commentedProperty> "for all a | a + (-a) = 0" ;
+                                                <http://openmath.org/vocab/math/meta#description> "This symbol denotes unary minus, i.e. the additive inverse." ;
+                                                rdfs:isDefinedBy <http://www.openmath.org/cd/arith1> .
+
+_:genid193 rdf:type <http://openmath.org/vocab/math#Binding> ;
+            <http://openmath.org/vocab/math#body> _:genid194 ;
+            <http://openmath.org/vocab/math#variables> [ ] .
+
+_:genid194 rdf:type <http://openmath.org/vocab/math#Application> ;
+            <http://openmath.org/vocab/math#arguments> [ ] .
+
+
+### cos
+<http://www.openmath.org/cd/transc1#cos> rdf:type owl:NamedIndividual ,
+                                                  <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                         <http://openmath.org/vocab/math/meta#formalProperty> [ ] ,
+[ ] ,
+[ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "cos 2A = cos^2 A - sin^2 A" ,
+                                                        "cos A = cos(-A)" ,
+                                                        "cos(x) = (exp(ix)+exp(-ix))/2" ;
+<http://openmath.org/vocab/math/meta#description> """This symbol represents the cos function as described in Abramowitz and
+Stegun, section 4.3. It takes one argument.""" .
+
+
+### ln
+<http://www.openmath.org/cd/transc1#ln> rdf:type owl:NamedIndividual ,
+                                                 <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                        <http://openmath.org/vocab/math/meta#example> [ ] ;
+<http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "-pi < Im ln x <= pi" ;
+<http://openmath.org/vocab/math/meta#description> """This symbol represents the ln function (natural logarithm) as
+described in Abramowitz and Stegun, section 4.1. It takes one
+argument.  Note the description in the CMP/FMP of the branch cut.  If
+signed zeros are in use, the inequality needs to be non-strict.""" .
+
+
+### log
+<http://www.openmath.org/cd/transc1#log> rdf:type owl:NamedIndividual ,
+                                                  <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                         <http://openmath.org/vocab/math/meta#example> [ ] ;
+<http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "a^b = c implies log_a c = b" ;
+<http://openmath.org/vocab/math/meta#description> """This symbol represents a binary log function; the first argument is the base,
+to which the second argument is log'ed.
+It is defined in Abramowitz and Stegun, Handbook of Mathematical
+Functions, section 4.1""" .
+
+
+### sin
+<http://www.openmath.org/cd/transc1#sin> rdf:type owl:NamedIndividual ,
+                                                  <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                         <http://openmath.org/vocab/math/meta#formalProperty> [ ] ,
+[ ] ,
+[ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "sin A = - sin(-A)" ,
+                                                        "sin(A + B) = sin A cos B + cos A sin B" ,
+                                                        "sin(x) = (exp(ix)-exp(-ix))/2i" ;
+<http://openmath.org/vocab/math/meta#description> """This symbol represents the sin function as described in Abramowitz and
+Stegun, section 4.3. It takes one argument.""" .
+
+
+### tan
+<http://www.openmath.org/cd/transc1#tan> rdf:type owl:NamedIndividual ,
+                                                  <http://openmath.org/vocab/math/meta#ApplicationSymbol> ;
+                                         <http://openmath.org/vocab/math/meta#formalProperty> [ ] ;
+<http://openmath.org/vocab/math/meta#commentedProperty> "tan A = sin A / cos A" ;
+<http://openmath.org/vocab/math/meta#description> """This symbol represents the tan function as described in Abramowitz and
+Stegun, section 4.3. It takes one argument.""" .
+
+
+### CurrentStateOutput_TD
+:CurrentStateOutput_TD rdf:type owl:NamedIndividual ,
+                                DINEN61360:Type_Description ;
+                       DINEN61360:Definition "A CurrentStateOutput is an integer variable that is used to reflect the current state of the state machine." ;
+                       DINEN61360:Note "Note that there should always be instance descriptions connected to this type description that are connected to the states of the state machine in order to specify which value reflects a certain state." ;
+                       DINEN61360:Preferred_Name "CurrentStateOutput" .
+
+
+### SkillCommandVariable_TD
+:SkillCommandVariable_TD rdf:type owl:NamedIndividual ,
+                                  DINEN61360:Type_Description ;
+                         DINEN61360:Definition "A SkillCommandVariable is an integer variable that is used to trigger transitions of the state machine. It can be seen as the counterpart to a skill method." ;
+                         DINEN61360:Note "Note that there should always be instance descriptions of this type description connected to the transitions of the state machine in order to specify which values have to be used to trigger a transition." ;
+                         DINEN61360:Preferred_Name "SkillCommandVariable" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( DINEN61360:Array
+                DINEN61360:Bag
+                DINEN61360:Boolean
+                DINEN61360:Integer
+                DINEN61360:List
+                DINEN61360:Real
+                DINEN61360:Set
+                DINEN61360:String
+              )
+] .
+
+
+--- Input Data ---
+There is a coffeemaking capability that takes two products "coffeeBeans" and "water" as input. In addition the capability takes an information "typeOfCoffe" (e.g., Americano, Espresso) as input. The capability returns two products "coffee" and "coffeeGrounds" as output. The input "water" has a property temperature, which is measured in degrees Celsius (°C) and must be >= 0 and <= 50 as requirements and is freely selectable. The input "typeOfCoffee" has a property that determines the desired type of coffee, which is freely selectable. Likewise, the output "coffee" has a property that returns the type of coffee as an assurance, which must be equal to the desired type of coffee from the input "typeOfCoffee". In addition, the output "coffee" has a property temperature that must be >= 90 as an assurance. 
+
+--- Output --- 
+OWL-Ontology:
+
+@prefix : <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation#> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix Coffee: <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/coffeemaking#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix openmath: <http://openmath.org/vocab/math#> .
+@prefix DINEN61360: <http://www.hsu-ifa.de/ontologies/DINEN61360#> .
+@base <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation#> .
+
+<http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/coffeemaking> rdf:type owl:Ontology ;
+                                                                              owl:imports <https://w3id.org/hsu-aut/cask/2.5.3> .
+
+### CoffeeType
+Coffee:CoffeeType rdf:type owl:NamedIndividual ,
+                           DINEN61360:Type_Description ;
+                  DINEN61360:Definition "The type indicates the type of coffee." .
+
+
+### Coffeemaking
+Coffee:Coffeemaking rdf:type owl:NamedIndividual ,
+                             VDI3682:ProcessOperator ,
+                             CSS:Capability ;
+                    VDI3682:hasInput Coffee:Coffeemaking_CoffeeBeans ,
+                                     Coffee:Coffeemaking_TypeOfCoffee ,
+                                     Coffee:Coffeemaking_Water ;
+                    VDI3682:hasOutput Coffee:Coffeemaking_Coffee ,
+                                      Coffee:Coffeemaking_CoffeeGrounds ;
+                    CSS:isRestrictedBy Coffee:Coffeemaking_Constraint_TypeOfCoffee ;
+                    CSS:requiresCapability Coffee:Coffeemaking .
+
+
+### Coffeemaking_Coffee
+Coffee:Coffeemaking_Coffee rdf:type owl:NamedIndividual ,
+                                    VDI3682:Product ;
+                           DINEN61360:has_Data_Element Coffee:Coffeemaking_Coffee_Temperature_DE ,
+                                                       Coffee:Coffeemaking_Coffee_TypeOfCoffee_DE .
+
+
+### Coffeemaking_CoffeeBeans
+Coffee:Coffeemaking_CoffeeBeans rdf:type owl:NamedIndividual ,
+                                         VDI3682:Product .
+
+
+### Coffeemaking_CoffeeGrounds
+Coffee:Coffeemaking_CoffeeGrounds rdf:type owl:NamedIndividual ,
+                                           VDI3682:Product .
+
+
+### Coffeemaking_Coffee_Temperature_DE
+Coffee:Coffeemaking_Coffee_Temperature_DE rdf:type owl:NamedIndividual ,
+                                                   DINEN61360:Data_Element ;
+                                          DINEN61360:has_Instance_Description Coffee:Coffeemaking_Coffee_Temperature_ID ;
+                                          DINEN61360:has_Type_Description Coffee:Temperature .
+
+
+### Coffeemaking_Coffee_Temperature_ID
+Coffee:Coffeemaking_Coffee_Temperature_ID rdf:type owl:NamedIndividual ,
+                                                   DINEN61360:Instance_Description ;
+                                          DINEN61360:Expression_Goal "Assurance" ;
+                                          DINEN61360:Logic_Interpretation ">=" ;
+                                          DINEN61360:Value 90 .
+
+
+### Coffeemaking_Coffee_TypeOfCoffee_DE
+Coffee:Coffeemaking_Coffee_TypeOfCoffee_DE rdf:type owl:NamedIndividual ,
+                                                    DINEN61360:Data_Element ;
+                                           DINEN61360:has_Instance_Description Coffee:Coffeemaking_Coffee_TypeOfCoffee_ID ;
+                                           DINEN61360:has_Type_Description Coffee:CoffeeType .
+
+
+### Coffeemaking_Coffee_TypeOfCoffee_ID
+Coffee:Coffeemaking_Coffee_TypeOfCoffee_ID rdf:type owl:NamedIndividual ,
+                                                    openmath:Variable ,
+                                                    DINEN61360:Instance_Description ,
+                                                    DINEN61360:String ;
+                                           openmath:name "http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/coffeemaking#Coffeemaking_Coffee_TypeOfCoffee_ID" ;
+                                           DINEN61360:Expression_Goal "Assurance" ;
+                                           DINEN61360:Logic_Interpretation "=" .
+
+
+### Coffeemaking_Constraint_TypeOfCoffee
+Coffee:Coffeemaking_Constraint_TypeOfCoffee rdf:type owl:NamedIndividual ,
+                                                     openmath:Application ,
+                                                     CSS:CapabilityConstraint ;
+                                            openmath:arguments ( Coffee:Coffeemaking_Coffee_TypeOfCoffee_ID Coffee:Coffeemaking_TypeOfCoffee_ID );
+                                            openmath:operator <http://www.openmath.org/cd/relation1#eq> ;
+                                            CSS:references Coffee:Coffeemaking_Coffee_TypeOfCoffee_ID ,
+                                                           Coffee:Coffeemaking_TypeOfCoffee_ID .
+
+### Coffeemaking_TypeOfCoffee
+Coffee:Coffeemaking_TypeOfCoffee rdf:type owl:NamedIndividual ,
+                                          VDI3682:Information ;
+                                 DINEN61360:has_Data_Element Coffee:Coffeemaking_TypeOfCoffee_DE .
+
+
+### Coffeemaking_TypeOfCoffee_DE
+Coffee:Coffeemaking_TypeOfCoffee_DE rdf:type owl:NamedIndividual ,
+                                             DINEN61360:Data_Element ;
+                                    DINEN61360:has_Instance_Description Coffee:Coffeemaking_TypeOfCoffee_ID ;
+                                    DINEN61360:has_Type_Description Coffee:CoffeeType .
+
+
+### Coffeemaking_TypeOfCoffee_ID
+Coffee:Coffeemaking_TypeOfCoffee_ID rdf:type owl:NamedIndividual ,
+                                             openmath:Variable ,
+                                             DINEN61360:Instance_Description ,
+                                             DINEN61360:String ;
+                                    openmath:name "http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/coffeemaking#Coffeemaking_TypeOfCoffee_ID" ;
+                                    DINEN61360:Logic_Interpretation "=" .
+
+
+### Coffeemaking_Water
+Coffee:Coffeemaking_Water rdf:type owl:NamedIndividual ,
+                                   VDI3682:Product ;
+                          DINEN61360:has_Data_Element Coffee:Coffeemaking_Water_Temperature_DE .
+
+
+### Coffeemaking_Water_Temperature_DE
+Coffee:Coffeemaking_Water_Temperature_DE rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Data_Element ;
+                                         DINEN61360:has_Instance_Description Coffee:Coffeemaking_Water_Temperature_ID ,
+                                                                             Coffee:Coffeemaking_Water_Temperature_Req1 ,
+                                                                             Coffee:Coffeemaking_Water_Temperature_Req2 ;
+                                         DINEN61360:has_Type_Description Coffee:Temperature .
+
+
+### Coffeemaking_Water_Temperature_ID
+Coffee:Coffeemaking_Water_Temperature_ID rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Instance_Description ;
+                                         DINEN61360:Logic_Interpretation "=" .
+
+
+### Coffeemaking_Water_Temperature_Req1
+Coffee:Coffeemaking_Water_Temperature_Req1 rdf:type owl:NamedIndividual ,
+                                                    DINEN61360:Instance_Description ;
+                                           DINEN61360:Expression_Goal "Requirement" ;
+                                           DINEN61360:Logic_Interpretation ">=" ;
+                                           DINEN61360:Value 0 .
+
+
+### Coffeemaking_Water_Temperature_Req2
+Coffee:Coffeemaking_Water_Temperature_Req2 rdf:type owl:NamedIndividual ,
+                                                    DINEN61360:Instance_Description ;
+                                           DINEN61360:Expression_Goal "Requirement" ;
+                                           DINEN61360:Logic_Interpretation "<=" ;
+                                           DINEN61360:Value 50 .
+
+
+### Temperature
+Coffee:Temperature rdf:type owl:NamedIndividual ,
+                            DINEN61360:Type_Description ;
+                   DINEN61360:Definition "A temperature of a subject measured in ° Celsius" ;
+                   DINEN61360:Unit_of_Measure "° C" .
+
+
+--- Input Data ---
+There is a multiplication capability that takes two integer factors "a" and "b" as input and returns an integer "product" as output, where all three entities are information. Each of the two inputs has a property that determines the value of that factor. Likewise, the output "product" has a property that gives the result of the multiplication as an assurance. 
+
+--- Output --- 
+OWL-Ontology:
+
+@prefix : <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation#> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix DINEN61360: <http://www.hsu-ifa.de/ontologies/DINEN61360#> .
+@prefix multiplication: <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/multiplication#> .
+@base <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation#> .
+
+<http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/multiplication> rdf:type owl:Ontology ;
+                                                                                owl:imports <https://w3id.org/hsu-aut/cask/2.5.3> .
+
+### IntegerType
+multiplication:IntegerType rdf:type owl:NamedIndividual ,
+                                    DINEN61360:Type_Description ;
+                           DINEN61360:Definition "This type is for numbers of type integer" .
+
+
+### Multiplication
+multiplication:Multiplication rdf:type owl:NamedIndividual ,
+                                       VDI3682:ProcessOperator ,
+                                       CSS:Capability ;
+                              VDI3682:hasInput multiplication:Multiplication_FactorA ,
+                                               multiplication:Multiplication_FactorB ;
+                              VDI3682:hasOutput multiplication:Multiplication_Product ;
+                              CSS:requiresCapability multiplication:Multiplication .
+
+
+### Multiplication_FactorA
+multiplication:Multiplication_FactorA rdf:type owl:NamedIndividual ,
+                                               VDI3682:Information ;
+                                      DINEN61360:has_Data_Element multiplication:Multiplication_FactorA_DE .
+
+
+### Multiplication_FactorA_DE
+multiplication:Multiplication_FactorA_DE rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Data_Element ;
+                                         DINEN61360:has_Instance_Description multiplication:Multiplication_FactorA_ID ;
+                                         DINEN61360:has_Type_Description multiplication:IntegerType .
+
+
+### Multiplication_FactorA_ID
+multiplication:Multiplication_FactorA_ID rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Instance_Description ;
+                                         DINEN61360:Logic_Interpretation "=" .
+
+
+### Multiplication_FactorB
+multiplication:Multiplication_FactorB rdf:type owl:NamedIndividual ,
+                                               VDI3682:Information ;
+                                      DINEN61360:has_Data_Element multiplication:Multiplication_FactorB_DE .
+
+
+### Multiplication_FactorB_DE
+multiplication:Multiplication_FactorB_DE rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Data_Element ;
+                                         DINEN61360:has_Instance_Description multiplication:Multiplication_FactorB_ID ;
+                                         DINEN61360:has_Type_Description multiplication:IntegerType .
+
+
+### Multiplication_FactorB_ID
+multiplication:Multiplication_FactorB_ID rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Instance_Description ;
+                                         DINEN61360:Logic_Interpretation "=" .
+
+
+### Multiplication_Product
+multiplication:Multiplication_Product rdf:type owl:NamedIndividual ,
+                                               VDI3682:Information ;
+                                      DINEN61360:has_Data_Element multiplication:Multiplication_Product_DE .
+
+
+### Multiplication_Product_DE
+multiplication:Multiplication_Product_DE rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Data_Element ;
+                                         DINEN61360:has_Instance_Description multiplication:Multiplication_Product_ID ;
+                                         DINEN61360:has_Type_Description multiplication:IntegerType .
+
+
+### Multiplication_Product_ID
+multiplication:Multiplication_Product_ID rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Instance_Description ;
+                                         DINEN61360:Expression_Goal "Assurance" ;
+                                         DINEN61360:Logic_Interpretation "=" .
+
+
+
+--- Input Data ---
+Distillation is a capability representing a simple distillation process with one input product called "liquidMixture". This mixture consists of two liquids and is defined by four properties. These properties are the boiling point and mass for each of the two liquids. The capability produces two outputs: distillate and residue. Both are also defined by their boiling point and mass. Boiling point and mass of each of the two liquids in the input mixture are constant values.
+The following constraints apply: The boiling points of the two liquids in the input mixture must not be equal. And on the output side, the boiling point of the distillate is lower than the one of the residue. Furthermore, conservation of mass applies, i.e. the sum of the masses of the two input liquids in the mix must be equal to the sum of the masses of residue and distillate.
+
+--- Output --- 
+OWL-Ontology:
+
+@prefix : <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation#> .
+@prefix OM: <http://openmath.org/vocab/math#> .
+@prefix CSS: <http://www.w3id.org/hsu-aut/css#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix Dist: <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/distillation#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix VDI3682: <http://www.w3id.org/hsu-aut/VDI3682#> .
+@prefix DINEN61360: <http://www.hsu-ifa.de/ontologies/DINEN61360#> .
+@base <http://www.hsu-hh.de/aut/ontologies/llm-capability-generation#> .
+
+<http://www.hsu-hh.de/aut/ontologies/llm-capability-generation/distillation> rdf:type owl:Ontology ;
+                                                                              owl:imports <https://w3id.org/hsu-aut/cask/2.5.3> .
+
+### DistillationBoilingPoint
+Dist:BoilingPoint rdf:type owl:NamedIndividual ,
+                           DINEN61360:Type_Description ;
+                  DINEN61360:Definition "The boiling point of a liquid is the temperature at which its vapor pressure equals the atmospheric pressure surrounding the liquid, causing it to transition from the liquid phase to the vapor (gas) phase" ;
+                  DINEN61360:Unit_of_Measure "K" .
+
+
+### DistillationConstraint_InputBoilingPoints
+Dist:Constraint_InputBoilingPoints rdf:type owl:NamedIndividual ,
+                                            OM:Application ,
+                                            CSS:CapabilityConstraint ;
+									OM:operator <http://www.openmath.org/cd/relation1#neq>;
+									OM:arguments ( Dist:Distillation_input_liquid1_boilingPoint_ID Dist:Distillation_input_liquid2_boilingPoint_ID ) .
+
+
+### DistillationConstraint_OutputBoilingPoints
+Dist:Constraint_OutputBoilingPoints rdf:type owl:NamedIndividual ,
+                                             OM:Application ,
+                                             CSS:CapabilityConstraint ;
+									OM:operator <http://www.openmath.org/cd/relation1#lt>;
+									OM:arguments ( Dist:Distillation_output_distillate_boilingPoint_ID_AS Dist:Distillation_output_residue_boilingPoint_ID_AS) .
+
+
+### DistillationConstraint_TotalMass
+Dist:Constraint_TotalMass rdf:type owl:NamedIndividual ,
+                                   OM:Application ,
+                                   CSS:CapabilityConstraint ;
+                        OM:operator <http://www.openmath.org/cd/relation1#eq>;
+						OM:arguments 
+						( 
+							[
+								rdf:type OM:Application;
+								OM:operator <http://www.openmath.org/cd/arith1#plus>;
+								OM:arguments (Dist:Distillation_input_liquid1_mass_ID Dist:Distillation_input_liquid2_mass_ID)
+							]
+							[
+								rdf:type OM:Application;
+								OM:operator <http://www.openmath.org/cd/arith1#plus>;
+								OM:arguments (Dist:Distillation_output_residue_mass_ID_AS Dist:Distillation_output_distillate_mass_ID_AS)
+							]
+						) .
+						
+
+
+### DistillationDistillation
+Dist:Distillation rdf:type owl:NamedIndividual ,
+                           VDI3682:ProcessOperator ,
+                           CSS:Capability ;
+                  VDI3682:hasInput Dist:Distillation_input_liquidMixture ;
+                  VDI3682:hasOutput Dist:Distillation_output_distillate ,
+                                    Dist:Distillation_output_residue ;
+				CSS:requiresCapability Dist:Distillation;
+				CSS:isRestrictedBy Dist:Constraint_InputBoilingPoints ,
+									Dist:Constraint_OutputBoilingPoints ,
+                                    Dist:Constraint_TotalMass .
+
+
+### DistillationDistillation_input_liquid1_boilingPoint_DE
+Dist:Distillation_input_liquid1_boilingPoint_DE rdf:type owl:NamedIndividual ,
+                                                         DINEN61360:Data_Element ,
+                                                         CSS:Property ;
+                                                DINEN61360:has_Instance_Description Dist:Distillation_input_liquid1_boilingPoint_ID ;
+                                                DINEN61360:has_Type_Description Dist:BoilingPoint .
+
+
+### DistillationDistillation_input_liquid1_boilingPoint_ID
+Dist:Distillation_input_liquid1_boilingPoint_ID rdf:type owl:NamedIndividual ,
+                                                         DINEN61360:Instance_Description ;
+                                                DINEN61360:Expression_Goal "Actual_Value" ;
+                                                DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationDistillation_input_liquid1_mass_DE
+Dist:Distillation_input_liquid1_mass_DE rdf:type owl:NamedIndividual ,
+                                                 DINEN61360:Data_Element ,
+                                                 CSS:Property ;
+                                        DINEN61360:has_Instance_Description Dist:Distillation_input_liquid1_mass_ID ;
+                                        DINEN61360:has_Type_Description Dist:Mass .
+
+
+### DistillationDistillation_input_liquid1_mass_ID
+Dist:Distillation_input_liquid1_mass_ID rdf:type owl:NamedIndividual ,
+                                                 DINEN61360:Instance_Description ;
+                                        DINEN61360:Expression_Goal "Actual_Value" ;
+                                        DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationDistillation_input_liquid2_boilingPoint_DE
+Dist:Distillation_input_liquid2_boilingPoint_DE rdf:type owl:NamedIndividual ,
+                                                         DINEN61360:Data_Element ,
+                                                         CSS:Property ;
+                                                DINEN61360:has_Instance_Description Dist:Distillation_input_liquid2_boilingPoint_ID ;
+                                                DINEN61360:has_Type_Description Dist:BoilingPoint .
+
+
+### DistillationDistillation_input_liquid2_boilingPoint_ID
+Dist:Distillation_input_liquid2_boilingPoint_ID rdf:type owl:NamedIndividual ,
+                                                         DINEN61360:Instance_Description ;
+                                                DINEN61360:Expression_Goal "Actual_Value" ;
+                                                DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationDistillation_input_liquid2_mass_DE
+Dist:Distillation_input_liquid2_mass_DE rdf:type owl:NamedIndividual ,
+                                                 DINEN61360:Data_Element ,
+                                                 CSS:Property ;
+                                        DINEN61360:has_Instance_Description Dist:Distillation_input_liquid2_mass_ID ;
+                                        DINEN61360:has_Type_Description Dist:Mass .
+
+
+### DistillationDistillation_input_liquid2_mass_ID
+Dist:Distillation_input_liquid2_mass_ID rdf:type owl:NamedIndividual ,
+                                                 DINEN61360:Instance_Description ;
+                                        DINEN61360:Expression_Goal "Actual_Value" ;
+                                        DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationDistillation_input_liquidMixture
+Dist:Distillation_input_liquidMixture rdf:type owl:NamedIndividual ,
+                                               VDI3682:Product ;
+                                      DINEN61360:has_Data_Element Dist:Distillation_input_liquid1_boilingPoint_DE ,
+                                                                  Dist:Distillation_input_liquid1_mass_DE ,
+                                                                  Dist:Distillation_input_liquid2_boilingPoint_DE ,
+                                                                  Dist:Distillation_input_liquid2_mass_DE ;
+                                      rdfs:comment "In distillation, a \"liquid mixture\" refers to a solution or blend comprising two or more substances with different boiling points, which are combined in the liquid phase." .
+
+
+### DistillationDistillation_output_distillate
+Dist:Distillation_output_distillate rdf:type owl:NamedIndividual ,
+                                             VDI3682:Product ;
+                                    DINEN61360:has_Data_Element Dist:Distillation_output_distillate_boilingPoint_DE ,
+                                                                Dist:Distillation_output_distillate_mass_DE ;
+                                    rdfs:comment "The term \"distillate\" refers to the purified or separated component that is collected after condensation from the vapor phase during the distillation process" .
+
+
+### DistillationDistillation_output_distillate_boilingPoint_DE
+Dist:Distillation_output_distillate_boilingPoint_DE rdf:type owl:NamedIndividual ,
+                                                             DINEN61360:Data_Element ;
+                                                    DINEN61360:has_Instance_Description Dist:Distillation_output_distillate_boilingPoint_ID_AS ;
+                                                    DINEN61360:has_Type_Description Dist:BoilingPoint .
+
+
+### DistillationDistillation_output_distillate_boilingPoint_ID_AS
+Dist:Distillation_output_distillate_boilingPoint_ID_AS rdf:type owl:NamedIndividual ,
+                                                                DINEN61360:Instance_Description ;
+                                                       DINEN61360:Expression_Goal "Assurance" ;
+                                                       DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationDistillation_output_distillate_mass_DE
+Dist:Distillation_output_distillate_mass_DE rdf:type owl:NamedIndividual ,
+                                                     DINEN61360:Data_Element ;
+                                            DINEN61360:has_Instance_Description Dist:Distillation_output_distillate_mass_ID_AS ;
+                                            DINEN61360:has_Type_Description Dist:Mass .
+
+
+### DistillationDistillation_output_distillate_mass_ID_AS
+Dist:Distillation_output_distillate_mass_ID_AS rdf:type owl:NamedIndividual ,
+                                                        DINEN61360:Instance_Description ;
+                                               DINEN61360:Expression_Goal "Assurance" ;
+                                               DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationDistillation_output_residue
+Dist:Distillation_output_residue rdf:type owl:NamedIndividual ,
+                                          VDI3682:Product ;
+                                 DINEN61360:has_Data_Element Dist:Distillation_output_residue_boilingPoint_DE ,
+                                                             Dist:Distillation_output_residue_mass_DE ;
+                                 rdfs:comment "In distillation, the \"residue\" refers to the portion of the original liquid mixture that remains in the distillation apparatus after the more volatile components have evaporated and been collected as distillate." .
+
+
+### DistillationDistillation_output_residue_boilingPoint_DE
+Dist:Distillation_output_residue_boilingPoint_DE rdf:type owl:NamedIndividual ,
+                                                          DINEN61360:Data_Element ;
+                                                 DINEN61360:has_Instance_Description Dist:Distillation_output_residue_boilingPoint_ID_AS ;
+                                                 DINEN61360:has_Type_Description Dist:BoilingPoint .
+
+
+### DistillationDistillation_output_residue_boilingPoint_ID_AS
+Dist:Distillation_output_residue_boilingPoint_ID_AS rdf:type owl:NamedIndividual ,
+                                                             DINEN61360:Instance_Description ;
+                                                    DINEN61360:Expression_Goal "Assurance" ;
+                                                    DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationDistillation_output_residue_mass_DE
+Dist:Distillation_output_residue_mass_DE rdf:type owl:NamedIndividual ,
+                                                  DINEN61360:Data_Element ,
+                                                  CSS:Property ;
+                                         DINEN61360:has_Instance_Description Dist:Distillation_output_residue_mass_ID_AS ;
+                                         DINEN61360:has_Type_Description Dist:Mass .
+
+
+### DistillationDistillation_output_residue_mass_ID_AS
+Dist:Distillation_output_residue_mass_ID_AS rdf:type owl:NamedIndividual ,
+                                                     DINEN61360:Instance_Description ;
+                                            DINEN61360:Expression_Goal "Assurance" ;
+                                            DINEN61360:Logic_Interpretation "=" .
+
+
+### DistillationMass
+Dist:Mass rdf:type owl:NamedIndividual ,
+                   DINEN61360:Type_Description ;
+          DINEN61360:Definition "Mass is a fundamental property of physical objects that quantifies the amount of matter within them. It's a measure of an object's resistance to acceleration when a force is applied." ;
+          DINEN61360:Unit_of_Measure "kg" .
+
+
+
+--- Input Data ---
+test
+
+--- Output --- 
+OWL-Ontology:
