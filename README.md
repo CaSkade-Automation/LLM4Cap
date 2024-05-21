@@ -13,9 +13,9 @@ In an IDE such as Eclipse a Maven Build can also be carried out with the Goal `p
 
 The CLI can then be used as follows:  
 ```
-java -jar target/llm4cap-0.0.1-SNAPSHOT.jar "Here is the capability description."
+java -jar target/llm4cap-cli-0.0.1-SNAPSHOT.jar "Here is the capability description."
 ```
 or 
 ```
-java -jar target/llm4cap-0.0.1-SNAPSHOT.jar -f CapabilityDescription.txt
+java -jar target/llm4cap-cli-0.0.1-SNAPSHOT.jar -f CapabilityDescription.txt
 ```
