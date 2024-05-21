@@ -1,58 +1,41 @@
 package prompting;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class PromptGeneration {
 
-public static String generatePrompt(String nLDescription) {
+	static String generatePrompt(String nLDescription) throws IOException {
 		
-		Path promptTemplate = Paths.get("prompt/prompt-template.txt");
-		Path outputPrompt = Paths.get("prompt/prompt.txt");
+		String prompt = readResourceFile("prompt-template.txt"); 
 		Map<String, String> placeholders = new HashMap<String, String>();
 
-        placeholders.put("T-Box", "prompt/cask_cropped.ttl");
-        placeholders.put("Example Task 1", "prompt/coffeemaking-task.txt");
-        placeholders.put("Example Capability A-Box 1", "prompt/coffeemaking.ttl");
-        placeholders.put("Example Task 2", "prompt/multiplication-task.txt");
-        placeholders.put("Example Capability A-Box 2", "prompt/multiplication.ttl");
-        placeholders.put("Example Task 3", "prompt/distillation-task.txt");
-        placeholders.put("Example Capability A-Box 3", "prompt/distillation.ttl");
-        placeholders.put("Task", nLDescription);
-        
-        try {
-            String prompt = new String(Files.readAllBytes(promptTemplate));
-            prompt = replacePlaceholdersWithFileContent(prompt, placeholders);
-            Files.write(outputPrompt, prompt.getBytes());
-            return prompt; 
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null; 
-        }
-	}
-	
-	private static String replacePlaceholdersWithFileContent(String prompt, Map<String, String> placeholders) throws IOException {
-        Pattern pattern = Pattern.compile("\\$\\{(.*?)\\}");
-        Matcher matcher = pattern.matcher(prompt);
+        placeholders.put("${T-Box}", readResourceFile("cask_cropped.ttl"));
+        placeholders.put("${Example Task 1}", readResourceFile("coffeemaking-task.txt"));
+        placeholders.put("${Example Capability A-Box 1}", readResourceFile("coffeemaking.ttl"));
+        placeholders.put("${Example Task 2}", readResourceFile("multiplication-task.txt"));
+        placeholders.put("${Example Capability A-Box 2}", readResourceFile("multiplication.ttl"));
+        placeholders.put("${Example Task 3}", readResourceFile("distillation-task.txt"));
+        placeholders.put("${Example Capability A-Box 3}", readResourceFile("distillation.ttl"));
+        placeholders.put("${Task}", nLDescription);
 
-        while (matcher.find()) {
-            String placeholder = matcher.group(1);
-            if (placeholders.containsKey(placeholder)) {
-            	String replacement; 
-            	if (Paths.get(placeholders.get(placeholder)).toFile().exists()) {
-            		replacement = new String(Files.readAllBytes(Paths.get(placeholders.get(placeholder))));
-            	} else {
-            		replacement = placeholders.get(placeholder);
-            	}
-            	prompt = prompt.replace("${" + placeholder + "}", replacement);
-            }
+        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+            prompt = prompt.replace(entry.getKey(), entry.getValue());
         }
-        return prompt;
-    }
+        
+        return prompt; 
+	}
+
+	private static String readResourceFile(String fileName) throws IOException {
+		try (InputStream input = PromptingHelper.class.getClassLoader().getResourceAsStream("prompt/" + fileName);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+	            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
+		}
+	}
 }
