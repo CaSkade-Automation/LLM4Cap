@@ -12,7 +12,6 @@ public class GPT4Prompting {
 		
         OkHttpClient client = new OkHttpClient();
         Request request = PromptingHelper.buildRequest(true, prompt, apiKey); 
-        String response = PromptingHelper.promptLlm(client, request); 
-        return response; 
+        return PromptingHelper.promptLlm(client, request); 
 	} 
 }

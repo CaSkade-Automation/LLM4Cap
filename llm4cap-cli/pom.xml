@@ -9,6 +9,11 @@
 	    <artifactId>picocli</artifactId>
 	    <version>4.7.6</version>
 	</dependency>
+	<dependency>
+		<groupId>com.github.caskade-automation.llm4cap</groupId>
+  		<artifactId>llm4cap-prompting</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   <build>
   	<plugins>

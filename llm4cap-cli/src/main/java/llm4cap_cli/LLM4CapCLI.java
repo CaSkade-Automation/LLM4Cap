@@ -9,6 +9,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+import prompting.GPT4Prompting;
 
 @Command(
 		name = "LLM4Cap",
@@ -17,6 +18,11 @@ import picocli.CommandLine.Parameters;
 		version = "0.0.1 SNAPSHOT"
 		)
 public class LLM4CapCLI implements Callable<Integer>{
+	
+	enum LLMOption {
+		CLAUDE, 
+		GPT
+	}
 	
 	@Option(names = {"-f", "--file"}, paramLabel = "FILE", description = "Natural language description of a capability to be generated written in a file.")
     private File file; 
@@ -27,8 +33,8 @@ public class LLM4CapCLI implements Callable<Integer>{
 	@Option(names = { "-o", "--out" }, description = "Output file (default: print to console)")
 	private File outputFile; 
 	
-	@Option(names = { "-l", "--llm" }, description = "LLM to use to generate capability ontology (default: Claude)")
-	private String llm = "Claude"; 
+	@Option(names = { "-l", "--llm" }, description = "LLM to use to generate capability ontology (CLAUDE or GPT; default: CLAUDE)")
+	private LLMOption llm = LLMOption.CLAUDE; 
 	
 	@Option(names = { "-h", "--help", "-?", "-help"}, usageHelp = true, description = "Display a help message")
     private boolean help = false;
@@ -40,17 +46,33 @@ public class LLM4CapCLI implements Callable<Integer>{
 			try {
 				String nLDescription = new String(Files.readAllBytes(file.toPath()));
 				System.out.println("NL Description: " + nLDescription);
+				prompting(nLDescription);
 			} catch (IOException e) {
 				System.err.println("Error reading file: " + e.getMessage());
 				return 1; 
 			}
 		} else if (input != null) {
 			System.out.println("NL Description: " + input);
+			prompting(input);
+			
 		} else {
 			System.out.println("No NL description of a capability provided. ");
 		}
 		return 0;
 	}
+	
+	public void prompting(String nLDescription) {
+		if (llm == LLMOption.GPT) {
+			try {
+				String response = GPT4Prompting.gpt4Prompting(nLDescription);
+				System.out.println(response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		int exitCode = new CommandLine(new LLM4CapCLI()).execute(args); 
