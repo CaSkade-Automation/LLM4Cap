@@ -2903,7 +2903,7 @@ Dist:Mass rdf:type owl:NamedIndividual ,
 
 
 --- Input Data ---
-test
+This is a test.
 
 --- Output --- 
 OWL-Ontology:
