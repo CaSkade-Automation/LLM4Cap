@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.concurrent.Callable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import clients.LlmModels;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import prompting.GPT4Prompting;
+import prompting.Llm4Cap;
 
 @Command(
 		name = "LLM4Cap",
@@ -17,12 +21,9 @@ import prompting.GPT4Prompting;
 		description = "Method to automatically generate and verify capability ontology generated from a natural language description of the capability with an LLM",
 		version = "0.0.1 SNAPSHOT"
 		)
-public class LLM4CapCLI implements Callable<Integer>{
+public class Llm4CapCli implements Callable<Integer>{
 	
-	enum LLMOption {
-		CLAUDE, 
-		GPT
-	}
+	private static final Logger logger = LoggerFactory.getLogger(Llm4CapCli.class);
 	
 	@Option(names = {"-f", "--file"}, paramLabel = "FILE", description = "Natural language description of a capability to be generated written in a file.")
     private File file; 
@@ -33,49 +34,49 @@ public class LLM4CapCLI implements Callable<Integer>{
 	@Option(names = { "-o", "--out" }, description = "Output file (default: print to console)")
 	private File outputFile; 
 	
-	@Option(names = { "-l", "--llm" }, description = "LLM to use to generate capability ontology (CLAUDE or GPT; default: CLAUDE)")
-	private LLMOption llm = LLMOption.CLAUDE; 
+	@Option(names = { "-m", "--model" }, description = "LLM to use to generate capability ontology (CLAUDE or GPT; default: CLAUDE)")
+	private LlmModels model = LlmModels.claude_3_opus_20240229; 
 	
 	@Option(names = { "-h", "--help", "-?", "-help"}, usageHelp = true, description = "Display a help message")
     private boolean help = false;
 
 
 	@Override
-	public Integer call() throws Exception {
+	public Integer call() {
+		
 		if (file != null) {
 			try {
-				String nLDescription = new String(Files.readAllBytes(file.toPath()));
-				System.out.println("NL Description: " + nLDescription);
+				String nLDescription = new String(Files.readAllBytes(this.file.toPath()));
+				logger.info("Started generating capability from natural language description: " + nLDescription);
 				prompting(nLDescription);
 			} catch (IOException e) {
-				System.err.println("Error reading file: " + e.getMessage());
+				logger.error("Error reading file: " + e.getMessage());
 				return 1; 
 			}
+			
 		} else if (input != null) {
-			System.out.println("NL Description: " + input);
-			prompting(input);
+			logger.info("Started generating capability from natural language description: " + input);
+			prompting(this.input);
 			
 		} else {
-			System.out.println("No NL description of a capability provided. ");
+			logger.error("No NL description of a capability provided. Make sure to provide a file with the --f parameter or a string input");
 		}
 		return 0;
 	}
 	
 	public void prompting(String nLDescription) {
-		if (llm == LLMOption.GPT) {
-			try {
-				String response = GPT4Prompting.gpt4Prompting(nLDescription);
-				System.out.println(response);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			String response = Llm4Cap.generateCapability(nLDescription, this.model);
+			logger.info(response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
 	
 	public static void main(String[] args) {
-		int exitCode = new CommandLine(new LLM4CapCLI()).execute(args); 
+		int exitCode = new CommandLine(new Llm4CapCli()).execute(args); 
 		System.exit(exitCode);
 	}
 }
