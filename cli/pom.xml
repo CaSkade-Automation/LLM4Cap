@@ -59,7 +59,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>llm4cap_cli.LLM4CapCLI</mainClass>
+                                    <mainClass>llm4cap_cli.Llm4CapCli</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
