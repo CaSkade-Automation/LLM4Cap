@@ -10,8 +10,8 @@
 	</parent>
 
 	<artifactId>llm4cap-lib</artifactId>
-	<name>LLM4Cap as a library to be included in other Java projects</name>
-	<description></description>
+	<name>LLM4Cap library</name>
+	<description>LLM4Cap library to be included in other Java projects</description>
 	
 	<dependencies>
 		<dependency>
