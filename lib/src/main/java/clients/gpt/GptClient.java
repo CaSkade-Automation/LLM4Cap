@@ -1,9 +1,13 @@
-package clients;
+package clients.gpt;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 
+import com.google.gson.Gson;
+
+import clients.LlmClient;
+import clients.LlmModels;
 import prompting.PromptGeneration;
 
 public class GptClient extends LlmClient {
@@ -27,23 +31,34 @@ public class GptClient extends LlmClient {
 			e.printStackTrace();
 		}
 		
+		// Generate the complete prompt with all examples etc
 		String prompt = PromptGeneration.generatePrompt(capabilityDescription);
 		
-		String jsonBody = String.format("{"
-			    + "\"model\": \"%s\","
-			    + "\"messages\": [{\"role\": \"user\", \"content\": \"%s\"}],"
-			    + "\"temperature\": 0"
-			    + "}", this.model, prompt);
+		// Create a new GPT request object and serialize to JSON
+		GptRequest gptRequest = new GptRequest();
+		gptRequest.setTemperature(0);
+		gptRequest.setModel(model);
+		
+		Message capabilityDescriptionMessage = new Message();
+		capabilityDescriptionMessage.setRole("user");
+		capabilityDescriptionMessage.setContent(prompt);
+		
+		gptRequest.addMessage(capabilityDescriptionMessage);
+		
+		Gson gson = new Gson();
+		String requestBody = gson.toJson(gptRequest);
 		
     	HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(this.API_URL))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + apiKey)
-                .POST(BodyPublishers.ofString(jsonBody))
+                .POST(BodyPublishers.ofString(requestBody))
                 .build();
     	
     	String result = executeRequest(request);
-    	return result;
+    	// Unwrap content:
+    	ChatCompletionResult res = gson.fromJson(result, ChatCompletionResult.class);
+    	return res.choices.get(0).message.getContent();
     }
 }
 
