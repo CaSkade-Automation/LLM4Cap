@@ -1,5 +1,7 @@
 package clients;
 
+import clients.gpt.GptClient;
+
 public class LlmClientFactory {
 	public static LlmClient getClient(LlmModels model) {
 		switch (model) {

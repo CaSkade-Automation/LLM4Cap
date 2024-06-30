@@ -51,10 +51,11 @@ public abstract class LlmClient {
 		}
 	}
 	
-	String executeRequest(HttpRequest request) {
+	protected String executeRequest(HttpRequest request) {
     	try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             logger.info("Status Code: " + response.statusCode());
+            logger.info("Status Code: " + response.body());
             return response.body();
         } catch (Exception e) {
             e.printStackTrace();
