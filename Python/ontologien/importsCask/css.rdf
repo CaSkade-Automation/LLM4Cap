@@ -1,0 +1,519 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3id.org/hsu-aut/css#"
+     xml:base="http://www.w3id.org/hsu-aut/css"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.w3id.org/hsu-aut/css">
+        <owl:versionIRI rdf:resource="http://www.w3id.org/hsu-aut/css/1.0.1"/>
+        <rdfs:comment>An ontology for the Capability, Skill and Service reference model defined by Plattform Industrie 4.0. See https://www.plattform-i40.de/IP/Redaktion/DE/Downloads/Publikation/CapabilitiesSkillsServices.html for a description of the abstract reference model.</rdfs:comment>
+        <rdfs:isDefinedBy>https://www.plattform-i40.de/IP/Redaktion/DE/Downloads/Publikation/CapabilitiesSkillsServices.html</rdfs:isDefinedBy>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#accessibleThrough -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#accessibleThrough">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#assures -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#assures">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#behaviorConformsTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#behaviorConformsTo">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#controls -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#controls">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#demands -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#demands">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#exposes -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#exposes">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#hasInput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#hasInput">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#hasOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#hasOutput">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#hasParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#hasParameter">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isInputFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isInputFor">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRealizedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRealizedBy">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRealizedBySkill -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRealizedBySkill">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#isRealizedBy"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRealizedBySkillParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRealizedBySkillParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#isRealizedBy"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRestrictedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRestrictedBy">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#CapabilityConstraint"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isSpecifiedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isSpecifiedBy">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#offers -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#offers">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#offersUseOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#offersUseOf">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#proposes -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#proposes">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#provides -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#provides">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#providesCapability -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#providesCapability">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#provides"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#providesSkill -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#providesSkill">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#provides"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#receives -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#receives">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#references -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#references">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#CapabilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#requiresCapability -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#requiresCapability">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#requiresProduct -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#requiresProduct">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Capability -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Capability">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Implementation-independent specification of a function in industrial production to achieve an effect in the physical or virtual world.
+
+Notes:
+- A capability can be restricted by constraints.
+- A capability can be specified by capability properties.
+- A capability can be realized by skills</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#CapabilityConstraint -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#CapabilityConstraint">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Condition imposed on a capability that further details its applicability. 
+
+Notes:
+- A capability constraint can be formulated as one of the following three constraint types:
+▪ A precondition, i.e., a condition that must hold before a function can be executed.
+▪ A postcondition, i.e., a condition that must hold after a function has been executed.
+▪ An invariant, i.e., a condition that must hold during the execution of a
+function.
+- A capability constraint restricts the values of the properties associated with the respective capability.
+- A capability constraint can involve one or more properties</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Process -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Process">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Production-relevant activity at any level of granularity that might affect materials and is performed by resources.
+
+Notes:
+- In general, a process can be decomposed into sub-processes or single activities.
+- A process can require capabilities to express that any suitable resource used for
+performing this process needs to provide compatible capabilities.
+- A process step relates to materials that constitute either input or output for the processing in this step</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Product -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Product">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Physical object being used as an input or created as an output of a production process.
+
+Notes:
+- The term Product may be used for objects in various states of manufacturing and may be seen as a generic term for raw materials, work in process and finished goods. Consumable supplies such as fuel, lubricants or cleaning agents may also be regarded as products. Furthermore, both purchased parts as well as parts manufactured in-house may be regarded as products.
+- Besides the actual product, there can be additional artifacts related to that product that are created and used in different life cycle phases to specify the product.
+▪ 3D/CAD models
+▪ specifications
+▪ BOM
+- A Service Requester may use these additional artifacts to formulate requirements against products.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Property -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Property">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:comment>Quality or characteristic inherent in or ascribed to any CSS model element
+
+Notes:
+- Properties may be used to describe and differentiate all kinds of PPR entities (i.e., products, process steps, resources)
+- Capabilities, services and offers are specified by properties in order to detail their description with regard to certain entities (e.g. products, process steps, resources)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Resource -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Resource">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Entity capable of performing functions specified as Capabilities and potentially implemented as Skills.
+
+Notes
+- A production resource may consist of hardware, software or both
+- A production resource may only provide capabilities (i.e. when engineering a resource, for planning purposes) and may additionally provide skills for automatic execution of the specified function.
+- A human becomes a Production Resource, if that person is able to perform a function specified as a capability.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Service -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Service">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Description of the commercial aspects and means of provision of offered capabilities.
+
+Notes:
+- The term “service” should be understood in the sense of economics and shall not be confused with e.g., web services.
+- The capabilities and means of provisions are specified by properties
+- A service is demanded by service requesters and provided by a service provider
+- A service is an input for an offer proposed by</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#ServiceOffer -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#ServiceOffer">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Proposal for a binding contract from the Service Provider to execute one or more particular services that a ServiceRequester can receive and accept.
+
+Notes:
+- A ServiceOffer should determine the commercial aspects of the service provision
+and may remain valid for a certain period of time.
+- An Offer may consist of partial offers proposed by different service providers</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#ServiceProvider -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#ServiceProvider">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Provides Services and can propose ServiceOffers to ServiceRequesters.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#ServiceRequester -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#ServiceRequester">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Demands Services under particular commercial aspects by providing either a specification of
+services or a specification of product requirements.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Skill -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Skill">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Executable implementation of an encapsulated (automation) function specified by a Capability.
+
+Notes:
+- A skill must have a skill interface. 
+- One capability can be realized by more than one skill. 
+- A skill may have any number of SkillParameters. 
+- A skill’s behavior conforms to a state machine. 
+- A skill controls a process step</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#SkillInterface -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#SkillInterface">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Access point to configure, control and monitor a skill.
+
+Notes:
+- A skill interface exposes interaction points to be used by other external systems
+(e.g. MES, other skills).
+- A skill interface exposes the state machine of a skill so that skill states can be
+monitored and transitions triggered.
+- A skill interface exposes the parameters of a skill so that they can be written and read.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#SkillParameter -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#SkillParameter">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Data unit to configure, control and monitor the execution of a skill.
+
+Notes:
+- Skill parameters might be used as in- /output parameters
+- Skill parameters might be used as results
+- Skill parameters might have a relation or be equivalent to capability properties</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#StateMachine -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

@@ -1,0 +1,3430 @@
+— Instruction —
+Translate a natural-language input that describes a capability into an ontology serialization in RDF / XMI (RDF/XML), based on the terminological knowledge given in the context section.
+Use the classes and properties from that knowledge to create the corresponding RDF individuals and connect them with the appropriate properties so that every detail of the input is represented.
+
+- Context -
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3id.org/hsu-aut/cask#"
+     xml:base="http://www.w3id.org/hsu-aut/cask"
+     xmlns:CSS="http://www.w3id.org/hsu-aut/css#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:math="http://openmath.org/vocab/math#"
+     xmlns:meta="http://openmath.org/vocab/math/meta#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ISA88="http://www.hsu-ifa.de/ontologies/ISA-TR88#"
+     xmlns:VDI2206="http://www.hsu-ifa.de/ontologies/VDI2206#"
+     xmlns:VDI3682="http://www.w3id.org/hsu-aut/VDI3682#"
+     xmlns:DINEN61360="http://www.hsu-ifa.de/ontologies/DINEN61360#">
+    <owl:Ontology rdf:about="http://www.w3id.org/hsu-aut/cask">
+        <owl:versionIRI rdf:resource="http://www.w3id.org/hsu-aut/cask/2.5.3"/>
+        <rdfs:comment>A domain ontology to describe capabilities and skills. This ontology extends the concepts defined in the CSS ontology (https://github.com/hsu-aut/css-ontology) by using ontology design patterns for different standards.</rdfs:comment>
+        <rdfs:comment>An ontology for the Capability, Skill and Service reference model defined by Plattform Industrie 4.0. See https://www.plattform-i40.de/IP/Redaktion/DE/Downloads/Publikation/CapabilitiesSkillsServices.html for a description of the abstract reference model.</rdfs:comment>
+        <rdfs:isDefinedBy>https://www.plattform-i40.de/IP/Redaktion/DE/Downloads/Publikation/CapabilitiesSkillsServices.html</rdfs:isDefinedBy>
+        <owl:versionInfo>2.5.3</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://openmath.org/vocab/math#arguments -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#arguments"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#attributeKey -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#attributeKey"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#attributeValue -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#attributeValue"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#binder -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#binder"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#body -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#body"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#operator -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#operator"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#symbol -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#symbol"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#target -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#target"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math#variables -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math#variables"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#example -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math/meta#example"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#formalProperty -->
+
+    <owl:ObjectProperty rdf:about="http://openmath.org/vocab/math/meta#formalProperty"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element_describes -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element_describes">
+        <owl:inverseOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Data_Element"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+        <rdfs:comment>Description:
+This ObjectProperty is used to connect a data element with any kind of entity that is described by the data element</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description_has_Type -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description_has_Type">
+        <owl:inverseOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description_has_Instance"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description_has_Instance -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description_has_Instance">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#complex_Data_Type_has_Member -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#complex_Data_Type_has_Member">
+        <owl:inverseOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#is_Member_of_Complex_Data_Type"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description_has_Type"/>
+                        <owl:allValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+        <rdfs:comment>Description:
+ObjectProperty that is used to connect an instance of a complex data type with corresponding members of the complex data type. These members are connected to types and instances of other (complex) data types</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#has_Data_Element -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Data_Element">
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+        <rdfs:comment>Description:
+This ObjectProperty is used to connect any kind of entity with a data element that is used for its description.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#has_Instance_Description -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Instance_Description">
+        <owl:inverseOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#is_Instance_Description_of_Data_Element"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+                    <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <rdfs:comment>Description:
+ObjectProperty is used to connect an individual that needs to be described by DataProperties with the Instance Description of that properties.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#has_Type_Description -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Type_Description">
+        <owl:inverseOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#is_Type_Description_of_Data_Element"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+                    <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+ObjectProperty is used to connect an individual that needs to be described by DataProperties with the Type Description of that properties.
+
+Functional:
+Any indivudual representing a property, can have only one Type Description</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#is_Instance_Description_of_Data_Element -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#is_Instance_Description_of_Data_Element">
+        <rdfs:comment>Description:
+ObjectProperty is used to connect an Instance Description with the Data_Element that it describes.
+
+Inverse of has_Instance_Description</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#is_Member_of_Complex_Data_Type -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#is_Member_of_Complex_Data_Type">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description_has_Type"/>
+                        <owl:allValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#is_Type_Description_of_Data_Element -->
+
+    <owl:ObjectProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#is_Type_Description_of_Data_Element">
+        <rdfs:comment>Description:
+ObjectProperty is used to connect a Type_Description with a Data_Element that has instace descriptions of this type. 
+
+Inverse of has_Type_Description</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#first -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#rest -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#consistsOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#consistsOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#SystemLimit"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:comment xml:lang="en">Describes containment of process elements (state, process operator, system limit) within a process</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#dependency -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#dependency">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <rdfs:comment xml:lang="en">This ObjectProperty is not explicitly contained within the VDI 3682. It is used to describe dependencies of In- and Outputs. Due to open world assumption (OWA) the case that more than one In- or Outputs occur does always mean an alternative Input. For the case, that In- and Outputs are depending on each other, the ObjectProperty Dependency can be used. It can be interpreted as an &quot;AND&quot; constructor between In- and/or Outputs of a process.
+
+E.g.: A process has two Inputs. If they are alternatives, then this fact must not  be explcitly modelled. If both Inputs have to go into the process, then the &quot;Dependency&quot; ObjectProperty is assigned between them.
+
+More complex example: Input A and B have to go into a process, while Input C and D are alternatives for A and B. The Inputs have to go as groups in the process. This equals: A AND B OR C AND D. The Dependency Operator is used between A and B as well as between C and D.
+
+Furthermore, the Operator can be used to express dependencies between In- and Outputs. If A and B are alternative Inputs that result in the Ouputs C for A or D for B then this equals: A AND C or D AND B. The ObjectProperty can be used between both, In- and/or Outputs.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#flow -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#flow">
+        <rdfs:comment>most generic concept for flows taken from VDI3682 and refined by semantics that is used in graphical notation</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasAlternativeInput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasAlternativeInput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasInput"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasAlternativeOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasAlternativeOutput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasOutput"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasInput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasInput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#flow"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <rdfs:comment>ObjectProperty that is used to link a ProcessOperator with an Input, i.e. Energy or Information or Product.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasOutput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#flow"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <rdfs:comment>ObjectProperty that is used to link a ProcessOperator with an Output, i.e. Energy or Information or Product.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasParallelInput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasParallelInput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasInput"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasParallelOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasParallelOutput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasOutput"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasPredecessor -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasPredecessor">
+        <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasSuccessor"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasInput"/>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasOutput"/>
+            </rdf:Description>
+        </owl:propertyChainAxiom>
+        <rdfs:comment>an object property that is used to infer a predecessing relationship between entities</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasSubProcess -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasSubProcess">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#isComposedOf"/>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#consistsOf"/>
+            </rdf:Description>
+        </owl:propertyChainAxiom>
+        <rdfs:comment>Is used to find the complete decomposed process of a process operatore. Note: This is syntactic sugar as a subprocess can be found by following &quot;isComposedOf&quot; and the inverse of &quot;consistsOf&quot;.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasSuccessor -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasSuccessor">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasOutput"/>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasInput"/>
+            </rdf:Description>
+        </owl:propertyChainAxiom>
+        <rdfs:comment>an object property that is used to infer a successing relationshipt between entities</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasUpperProcess -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasUpperProcess">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#isComposedOf"/>
+            </rdf:Description>
+            <rdf:Description>
+                <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#consistsOf"/>
+            </rdf:Description>
+        </owl:propertyChainAxiom>
+        <rdfs:comment>Is used to find the parent (upper) process of a lower level process operator. Note: This is syntactic sugar as a parent process can be found by following the inverse of &quot;isComposedOf&quot; and the inverse of &quot;consistsOf&quot;.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#isAssignedTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#isAssignedTo">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+        <rdfs:comment>ObjectProperty that is used to indicate that a process operator is performed by a technical resource.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#isCharacterizedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#isCharacterizedBy">
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Characteristic"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#isComposedOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#isComposedOf">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <rdfs:comment>Used for decomposition. A process operator can be composed of multiple more detailed process operators.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#isIdentifiedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#isIdentifiedBy">
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Identification"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#exposesSkillMethod -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#exposesSkillMethod">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#exposes"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillMethod"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#exposesSkillOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#exposesSkillOutput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/cask#exposesSkillVariable"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillOutput"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#exposesSkillParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#exposesSkillParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/cask#exposesSkillVariable"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#exposesSkillVariable -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#exposesSkillVariable">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#exposes"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#exposesStateMachine -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#exposesStateMachine">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#exposes"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasCurrentState -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasCurrentState">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/ISA-TR88#State"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasCurrentStateOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasCurrentStateOutput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/cask#hasSkillOutput"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasSkillCommand -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasSkillCommand">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#hasParameter"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillCommand"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasSkillMethod -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasSkillMethod">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillMethod"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasSkillOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasSkillOutput">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/cask#hasSkillVariable"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillOutput"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasSkillVariable -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasSkillVariable">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#invokes -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#invokes">
+        <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/cask#isInvokedBy"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillMethod"/>
+        <rdfs:range rdf:resource="http://www.hsu-ifa.de/ontologies/ISA-TR88#Transition"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#isInvokedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/cask#isInvokedBy"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#accessibleThrough -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#accessibleThrough">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#assures -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#assures">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#behaviorConformsTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#behaviorConformsTo">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#controls -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#controls">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#demands -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#demands">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#exposes -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#exposes">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillMethod"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#hasInput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#hasInput">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#hasOutput -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#hasOutput">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#hasParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#hasParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/cask#hasSkillVariable"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isInputFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isInputFor">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRealizedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRealizedBy">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRealizedBySkill -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRealizedBySkill">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#isRealizedBy"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRealizedBySkillParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRealizedBySkillParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#isRealizedBy"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRestrictedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRestrictedBy">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#CapabilityConstraint"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isSpecifiedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#isSpecifiedBy">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#offers -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#offers">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#offersUseOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#offersUseOf">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#proposes -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#proposes">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#provides -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#provides">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#providesCapability -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#providesCapability">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#provides"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/cask#ProvidedCapability"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#providesSkill -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#providesSkill">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3id.org/hsu-aut/css#provides"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#receives -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#receives">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#references -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#references">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#CapabilityConstraint"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#requiresCapability -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#requiresCapability">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#requiresProduct -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/hsu-aut/css#requiresProduct">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://openmath.org/vocab/math#encoding -->
+
+    <owl:DatatypeProperty rdf:about="http://openmath.org/vocab/math#encoding">
+        <rdfs:comment>Specifies the encoding of a foreign object.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://openmath.org/vocab/math#name -->
+
+    <owl:DatatypeProperty rdf:about="http://openmath.org/vocab/math#name">
+        <rdfs:comment>Represents the name of a variable.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://openmath.org/vocab/math#value -->
+
+    <owl:DatatypeProperty rdf:about="http://openmath.org/vocab/math#value">
+        <rdfs:comment>Represents the value of a literal or a foreign object.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#commentedProperty -->
+
+    <owl:DatatypeProperty rdf:about="http://openmath.org/vocab/math/meta#commentedProperty"/>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#description -->
+
+    <owl:DatatypeProperty rdf:about="http://openmath.org/vocab/math/meta#description"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member_Dimension -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member_Dimension">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Description:
+
+Indicates the dimension of an array member.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member_Position -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member_Position">
+        <rdfs:comment>Description:
+
+DataProperty that indicates the position of an Array_Member in a DataType List.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Boolean_Operator -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Boolean_Operator">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>AND</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>NAND</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first>NOR</rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first>OR</rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first>XOR</rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:comment>Is used with Boolean_Association to define what kind of boolean relation connects the Data_Elements of the Boolean_Association</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Code -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Code">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+DIN EN 61360-1:2018 Section 7.3
+Unique identifier of this data element type. Preferable this should be a standardized identifier (e.g. from eclss or common data dictionary).  optional exlusion of &quot;o&quot; and &quot;i&quot; is not implemented.    
+
+Liability: necessary    
+
+type: string with 6 digits between, first three digits are a-z and last three digits are 0-9  poposed data range expression: xsd:string[pattern &quot;[a-z0-9] {6}&quot;]</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Created_at_Date -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Created_at_Date">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+        <rdfs:comment>Description: 
+A SemAnz40 attribute, that indicates the creation date for an instance.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Definition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Definition">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+A textual definition of the data element
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 8.3
+
+Type: String
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Drawing_Reference -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Drawing_Reference">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+A link to a drawing (or picture) that is used for further explanation of the data element
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.13
+
+Type: Contains a URL link as a string to a picture
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Expression_Goal -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Expression_Goal">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>Actual_Value</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>Assurance</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first>Requirement</rdf:first>
+                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:comment>Description:
+
+The goal of the values expression, which can be a Requirement, an Assurance or an actual (e.g. measured) value.
+
+Liability: Necessary</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Format_DIN61360_SemAnz40 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Format_DIN61360_SemAnz40">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+        <rdfs:comment>Description: 
+
+Indicates, whether the described type or entity is described by the DIN61360&amp;SemAnz40 Format.
+
+Liability: Necessary
+
+Type: If true, the Data Element is based on the Din61360 and SemAnz40 description
+
+Poposed Data Range Expression: xsd:boolean</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Formula -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Formula">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+A mathematical euqation that is being used for characterization of the data element
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.5
+
+Type: contains a URL link as a string to a source file that describes the formula
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#List_Member_Position -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#List_Member_Position">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#List_Member"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Description:
+
+DataProperty that indicates the position of a List_Member in a DataType List.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Logic_Interpretation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Logic_Interpretation">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>&lt;</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>&lt;=</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first>=</rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first>&gt;</rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first>&gt;=</rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:comment>Description:
+
+Indicates, whether a value with a certain Expression Goal has to be considered as equal (&quot;=&quot;), greater than (&quot;&lt;&quot;), lower than (&quot;&gt;&quot;) or in combination with an equals (i.e. &quot;&lt;=&quot;, &quot;&gt;=&quot;).
+
+Liability: Necessary</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Note -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Note">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Additional information that are important to understand the meaning of the data element
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 8.4
+
+Type: String
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Preferred_Letter_Symbol -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Preferred_Letter_Symbol">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+A sign or literal that is used to represent the property (e.g. greek &quot;sigma&quot; for tension))
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.6
+
+Type: IEC 60027, IEC 60747 or IEC 60148 compliant formula sign described as a string
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Preferred_Name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Preferred_Name">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Represents the preferred name of the data element type, that is being used for searches for instance.
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.4
+
+Type: String with lower and upper case, with a maximum of 70 characters
+
+Poposed Data Range Expression: xsd:string[maxLength 70]</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Quality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Quality">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <rdfs:comment>Description:
+
+Not supported so far, since it requires a additional quality ontology</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Remark -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Remark">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Additional information that can be used to express a oppinion but should not change the meaning of the definition.
+DIN EN 61360-1:2018 Section 8.5</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Revision_Number -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Revision_Number">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Number that represents the actual count of changes
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.5
+
+Type: Integer with two digits between 1 and 99
+
+Poposed Data Range Expression: xsd:integer[&gt;= 1 , &lt;= 99]</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Short_Name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Short_Name">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+A short name or acronym that is used for the preferred name
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.6
+
+Type: Strong restrictions of DIN61360  not implemented, just strings necessary. Maximum characters is 17.
+
+Poposed Data Range Expression: xsd:string[maxLength 17]</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Source_Document_of_Definition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Source_Document_of_Definition">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+A link to a source file, where the definition of the data element was taken from
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 8.6
+
+Type: Should contain a description of the source document with a maximum of 80 characters. Document has to be approved by ISO or IEC (e.g. should be a standard like IEC XXXXX). Alternatively use a URL to give a source document that is not approved by ISO.
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Synonymous_Letter_Symbol -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Synonymous_Letter_Symbol">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+A synonym that is used for the preferred equation sign
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 6.7
+
+Type: IEC 60027, IEC 60747 or IEC 60148 compliant formula sign
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Synonymous_Name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Synonymous_Name">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Synonyms to the preferred name
+
+Liability: Optional
+
+DIN EN 61360-1:2018 Section 7.7
+
+Type: String with lower and upper case, with a maximum of 70 characters
+
+Poposed Data Range Expression: xsd:string[maxLength 70]</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Unit_of_Measure -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Unit_of_Measure">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Defines the unit of measure for a data element (e.g. km/h)
+
+Liability: case dependend, checked by SWRL rule 2
+
+DIN EN 61360-1:2018 Section 10.7
+
+Type: This data property represents the unit of measure, which should be ISO 31 compliant (SI-Units)
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description_has_Type"/>
+                        <owl:allValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:comment>Description:
+
+The actual value of something being described.
+
+Liability: Necessary
+
+SemAnz40
+
+Type: This data property represents the value of the data element, which is a string, while the actual data type is represented by the Data Property DataType (!)
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_Field_length -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_Field_length">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the field length, since this could be exponential (expressed with an E), it is a string
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_Field_length_Variable -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_Field_length_Variable">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the case, that a value format has a variable field length (true)
+
+Poposed Data Range Expression: xsd:boolean</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_non-quantitativ -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_non-quantitativ">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>A</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>B</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first>M</rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first>N</rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first>X</rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <owl:propertyDisjointWith rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_quantitativ"/>
+        <rdfs:comment>Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the non-quantitativ formats, string
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_quantitativ -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_Format_quantitativ">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>NR1</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>NR2</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first>NR3</rdf:first>
+                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:comment>Description:
+Defines the representation of a data element in length and kind. See DIN61360 for detailed description of possible formats. Possible definitions include non-quantitative formats, quantitative formats and maximum count of characters
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 10.8
+
+Type: This data property represents only the quantitativ formats, string
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+        <rdfs:comment>Description: 
+Represents the possible values for a data element
+
+Liability: optional (in DIN613060 case depended due to classification of data element, which is not implemented here)
+
+DIN EN 61360-1:2018 Section 16
+
+Type: This data property represents the information, if there is a value list (if so, true), basically the values that the data property &quot;Value&quot; is allowed to hold. 
+
+Poposed Data Range Expression: xsd:boolean</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List_Member -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List_Member">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+        <rdfs:comment>Description: 
+Represents the possible values for a data element
+
+Liability: optional (in DIN613060 case depended due to classification of data element, which is not implemented here)
+
+DIN EN 61360-1:2018 Section 16
+
+Type: This data property represents the one (!) member of the value list, violation may result in inconsistency, since the compliance of value list and value is checked by SWRL rule 3. 
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Version_Number -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Version_Number">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Number that indicates different versions of one data element type
+
+Liability: Necessary
+
+DIN EN 61360-1:2018 Section 7.8
+
+Type: Integer with three digits max, so between 1 and 999
+
+Poposed Data Range Expression: xsd:integer[&gt;= 1 , &lt;= 999]</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#backwards_compatible_Revision -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#backwards_compatible_Revision">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Indicates, to which revisions the data type is backwards compatible.
+
+Type: Integer
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#backwards_compatible_Version -->
+
+    <owl:DatatypeProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#backwards_compatible_Version">
+        <rdfs:domain rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Indicates, to which version numbers the data type is backwards compatible.
+
+Type: Integer
+
+Poposed Data Range Expression: xsd:string</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#longName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#longName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment>A property that is used to give a long name to an individual.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#shortName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#shortName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment>A property that is used to give a short name to an individual.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasDefaultValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasDefaultValue">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasOptionValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasOptionValue">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasVariableName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasVariableName">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#hasVariableType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/hsu-aut/cask#hasVariableType">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#isRequired -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/hsu-aut/cask#isRequired">
+        <rdfs:domain rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://openmath.org/vocab/math#Application -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Application">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Compound"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#arguments"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#ObjectList"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#operator"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#operator"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#arguments"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Constructs an OpenMath object from a sequence of one or more OpenMath objects. The first child of an application is referred to as its &quot;head&quot; while the remaining objects are called its &quot;arguments&quot;.  An OpenMath application object can be used to convey the mathematical notion of application of a function to a set of arguments.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Attribution -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Attribution">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Compound"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#arguments"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#AttributionList"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#target"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#target"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#arguments"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Decorates an object with a sequence of one or more pairs made up of an OpenMath symbol, the &quot;attribute&quot;, and an associated  object, the &quot;value of the attribute&quot;. The value of the attribute can be an OpenMath attribution object itself. As an example of this, consider the OpenMath objects representing groups, automorphism groups, and group dimensions. It is then possible to attribute an OpenMath object representing a group by its automorphism group, itself attributed by its dimension.
+
+OpenMath objects can be attributed with OpenMath foreign objects, which are containers for non-OpenMath structures. For example a mathematical expression could be attributed with its spoken or visual rendering.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#AttributionList -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#AttributionList">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+        <rdfs:comment>A list of attribute-value pairs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Binding -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Binding">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Compound"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#binder"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#body"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#variables"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#VariableList"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#binder"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#body"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#variables"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A variable binding that is constructed from an OpenMath object, and from a sequence of zero or more variables followed by another OpenMath object.  The binding consits of a &quot;binder&quot; object, the &quot;body&quot; and the &quot;variables&quot; to be bound in the &quot;body&quot;. It is allowed to have no bound variables, but the binder object and the body should be present. Binding can be used to express functions or logical statements.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Compound -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Compound">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Object"/>
+        <rdfs:comment>An object that is composed of some other mathematical objects.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Error -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Error">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Compound"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#arguments"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#ObjectList"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#symbol"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Symbol"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#symbol"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Represents error objects which are made up of an OpenMath symbol and a sequence of zero or more OpenMath objects. This object has no direct mathematical meaning.  Errors occur as the result of some treatment on an OpenMath object and are thus of real interest only when some sort of communication is taking place. Errors may occur inside other objects and also inside other errors. Error objects might consist only of a symbol as in the object: error (S).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Literal -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Literal">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Object"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#value"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An OpenMath literal (integer, float, character string, bytearray).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Object -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Object">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:comment>Component of a mathematical expression.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#ObjectList -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#ObjectList">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+                        <owl:someValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+                        <owl:someValuesFrom rdf:resource="http://openmath.org/vocab/math#ObjectList"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A list of mathematical objects.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Reference -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Reference">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Object"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#target"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#target"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Symbol -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Symbol">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Object"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math/meta#example"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math/meta#formalProperty"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#isDefinedBy"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math/meta#Library"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Symbols are uniquely defined by the Content Dictionary in which they occur and by a name. Each symbol has no more than one definition in a Content Dictionary. Many Content Dictionaries may define differently a symbol with the same name (e.g. the symbol union is defined as associative-commutative set theoretic union in a Content Dictionary set1 but another Content Dictionary, multiset1 might define a symbol union as the union of multi-sets).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#Variable -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#Variable">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Object"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#name"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://openmath.org/vocab/math#name"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Denote parameters, variables or indeterminates (such as bound variables of function definitions, variables in summations and integrals, independent variables of derivatives).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math#VariableList -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math#VariableList">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+                        <owl:someValuesFrom rdf:resource="http://openmath.org/vocab/math#Variable"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+                        <owl:someValuesFrom rdf:resource="http://openmath.org/vocab/math#Variable"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+                <owl:allValuesFrom rdf:resource="http://openmath.org/vocab/math#Variable"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A list of variables.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#ApplicationSymbol -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math/meta#ApplicationSymbol">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Symbol"/>
+        <rdfs:comment>The symbol may appear as the first child of an OpenMath application object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#AttributionSymbol -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math/meta#AttributionSymbol">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Symbol"/>
+        <rdfs:comment>The symbol may be used as key in an OpenMath attribution object, i.e. as the first element of a (key, value) pair, or in an equivalent context (for example to refer to the value of an attribution).  This form of attribution
+may be ignored by an application, so should be used for information which does not change the meaning of the attributed OpenMath object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#BinderSymbol -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math/meta#BinderSymbol">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Symbol"/>
+        <rdfs:comment>The symbol may appear as the first child of an OpenMath binding object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#ConstantSymbol -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math/meta#ConstantSymbol">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Symbol"/>
+        <rdfs:comment>The symbol cannot be used to construct an OpenMath compound object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#ErrorSymbol -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math/meta#ErrorSymbol">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Symbol"/>
+        <rdfs:comment>The symbol may appear as the first child of an OpenMath error object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#Library -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math/meta#Library">
+        <rdfs:comment>Represents a collection of related OpenMath symbols.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://openmath.org/vocab/math/meta#SemanticAttributionSymbol -->
+
+    <owl:Class rdf:about="http://openmath.org/vocab/math/meta#SemanticAttributionSymbol">
+        <rdfs:subClassOf rdf:resource="http://openmath.org/vocab/math#Symbol"/>
+        <rdfs:comment>This is the same as attribution except that it modifies the meaning of the attributed OpenMath object and thus cannot be ignored by an application, without changing the meaning.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Array -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Array">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#complex_Data_Type_has_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member_Dimension"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Array_Member_Position"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Bag -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Bag">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#complex_Data_Type_has_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Bag_Member"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Bag_Member -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Bag_Member">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Boolean -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Boolean">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Type"/>
+        <owl:disjointWith rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Type"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/css#Property"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Type_Description"/>
+                <owl:someValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Instance_Description"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <rdfs:comment>Description:
+Contains a the structure of all data element (DIN61360 3.5.2, see also section 4)
+
+Each Data_Element has to have a type description and may have an instance description</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Type -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Type"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Expression_Goal"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Logic_Interpretation"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Integer -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Integer">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#List -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#List">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#complex_Data_Type_has_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#List_Member"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#List_Member -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#List_Member">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#List_Member_Position"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Real -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Real">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Set -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Set">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#complex_Data_Type_has_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Set_Member"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Set_Member -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Set_Member">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Complex_Data_Type_Member"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Description:
+Indicates which kind of DataType a data element must be. This does not include all data types of DIN61360! 
+
+Liability: Necessary
+
+DIN61360: 3.4.1
+
+Type: is a enumeration of standard compliant data types. Please see DIN61360 for a description of level/class-instance/list/set/bag/array</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#String -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#String">
+        <rdfs:subClassOf rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Simple_Data_Type"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Value_List_Member"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Code"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Definition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Preferred_Name"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Short_Name"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Version_Number"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Preferred_Letter_Symbol"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Synonymous_Letter_Symbol"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Synonymous_Name"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Value list is expressed as exactly 1, since not using a value list has to result in value list false</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/ISA-TR88#Command -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/ISA-TR88#Command">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#StatefulMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/ISA-TR88#State -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/ISA-TR88#State"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/ISA-TR88#StateMachine -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/ISA-TR88#StateMachine">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/ISA-TR88#Transition -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/ISA-TR88#Transition"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/VDI2206#Energy -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/VDI2206#Energy">
+        <owl:equivalentClass rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Energy"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/VDI2206#Information -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/VDI2206#Information">
+        <owl:equivalentClass rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Information"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/VDI2206#Module -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/VDI2206#Module">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/VDI2206#Product -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/VDI2206#Product">
+        <owl:equivalentClass rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Product"/>
+        <owl:equivalentClass rdf:resource="http://www.w3id.org/hsu-aut/css#Product"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/VDI2206#System -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/VDI2206#System">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#List -->
+
+    <owl:Class rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Thing">
+        <rdfs:comment>In order to check consistency, the following procedure is used:
+
+First, the reasoner checks, whether the class expressions to hold for the ABox. If that is not the case, then a explanation of inconsistency can be accessed.
+
+Second, SWRL rules are used to check the constency aspects that cannot be modelled through class expressions. These rules infer 4 &quot;Overall_X_Constent&quot; DataProperties. For the case that incremental rules were possible, other consistency attributes are inferred, so that in case of inconsistency a debugging can be started.
+
+Explanation to class expressions in relation to DIN61360 definitions:
+
+&quot;exactly&quot; is used for &quot;necessary&quot; (zwingend)
+&quot;max&quot; is used for &quot;optinal&quot; (wahlfrei) with maximum restriction
+
+If something is just &quot;optional&quot;, it will not occur in the class expression.
+
+If a liability in DIN61360 states &quot;case dependend&quot; (bedingt), then this considered in a SWRL rule, which will give the DataProperties of &quot;x_Consistent&quot; to the Data_Element</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Attribute -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Attribute">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#SystemLimit"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Characteristic -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Characteristic">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Attribute"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Identification"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Energy -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Energy">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <rdfs:comment>Energy is requiered by the process operator to fullfill the process. Energy is Input and Output of a process. Energy can be any kind of energy, exp.: electricity, heat,...</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Identification -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Identification">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Attribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Information -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Information">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <rdfs:comment>Information input for a process operator can be any kind of information required to fullfill the process. Information output can be any kind of information created by the process.
+[VDI 3682-1]</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Process -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Process">
+        <owl:equivalentClass rdf:resource="http://www.w3id.org/hsu-aut/css#Process"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#SystemLimit"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+        <rdfs:comment>A process describes the desired behavior of a process operator, by means of a solution neutral description of inputs and outputs. Products,energies  and information are converted into new products,energies  and information by a process operator. The process operator implements this conversion with the help of technical resources.
+[VDI3682-1]
+
+Note that a process may have inputs and outputs. These are inputs / outputs that are on the system limit of this process.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasInput"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasOutput"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#consistsOf"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:someValuesFrom rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Process"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasInput"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#hasOutput"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#SystemLimit"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+        <rdfs:comment>One step of a process that transfers a status &quot;before&quot; (i.e., an input) to a status &quot;after&quot; (i.e., an output). 
+Everything that has an input and an output may be a process operator (but could also be a process).
+Everything that has an input and an output AND is contained within a process is a process operator.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Product -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Product">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#State"/>
+        <rdfs:comment>A rather generic concepts to describe all sorts of raw, intermediate or final products. Can also be used to describe flow of materials.
+[VDI 3682-1]</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#State -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#State">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#SystemLimit"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+        <rdfs:comment>A State describes the actual state of a Product/Energy/Information. Exp.: status ante operationem and status post operationem.
+[VDI3682-1]</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#SystemLimit -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#SystemLimit">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource"/>
+        <rdfs:comment>The system limit determines the observation horizon of the process. In a broader sense, this can also be seen as the balance limit for incoming products/energy/information and outgoing products/energy/information.
+[VDI 3682-1]</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#TechnicalResource">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <rdfs:comment>The technical resource is able to implement certain processes and is an abstract description of a system.
+[VDI 3682-1]</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#CurrentStateOutput -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#CurrentStateOutput">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillOutput"/>
+        <rdfs:comment>May be used to get the current state as an integer value</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#GetOutputs -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#GetOutputs">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#StatelessMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#ProvidedCapability -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#ProvidedCapability">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#RequiredCapability -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#RequiredCapability">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#SetParameters -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#SetParameters">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#StatelessMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#SkillCommand -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#SkillCommand">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>May be used to invoke a transition with a numerical value</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#SkillMethod -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#SkillMethod">
+        <rdfs:comment>Abstract concept of a method to invoke a skill. Needs to be implemented and modeled in detail for a specific technology</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#SkillOutput -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#SkillOutput">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+        <rdfs:comment>May be used to retrieve results during or after Skill execution</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#SkillVariable -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#SkillVariable">
+        <rdfs:comment>A super class for various types of Skill variables: 
+- SkillCommand: Allows to control a skill via a numeric command value
+- SkillParameter: Allows to parameterize a Skill execution
+- SkillOutput: Allows to retrieve results from a Skill</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#StatefulMethod -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#StatefulMethod">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#StatelessMethod -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/cask#StatelessMethod">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Capability -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Capability">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Implementation-independent specification of a function in industrial production to achieve an effect in the physical or virtual world.
+
+Notes:
+- A capability can be restricted by constraints.
+- A capability can be specified by capability properties.
+- A capability can be realized by skills</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#CapabilityConstraint -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#CapabilityConstraint">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://openmath.org/vocab/math#Application"/>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://www.w3id.org/hsu-aut/css#isRestrictedBy"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:someValuesFrom rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Condition imposed on a capability that further details its applicability. 
+
+Notes:
+- A capability constraint can be formulated as one of the following three constraint types:
+▪ A precondition, i.e., a condition that must hold before a function can be executed.
+▪ A postcondition, i.e., a condition that must hold after a function has been executed.
+▪ An invariant, i.e., a condition that must hold during the execution of a
+function.
+- A capability constraint restricts the values of the properties associated with the respective capability.
+- A capability constraint can involve one or more properties</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Process -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Process">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Production-relevant activity at any level of granularity that might affect materials and is performed by resources.
+
+Notes:
+- In general, a process can be decomposed into sub-processes or single activities.
+- A process can require capabilities to express that any suitable resource used for
+performing this process needs to provide compatible capabilities.
+- A process step relates to materials that constitute either input or output for the processing in this step</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Product -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Product">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Physical object being used as an input or created as an output of a production process.
+
+Notes:
+- The term Product may be used for objects in various states of manufacturing and may be seen as a generic term for raw materials, work in process and finished goods. Consumable supplies such as fuel, lubricants or cleaning agents may also be regarded as products. Furthermore, both purchased parts as well as parts manufactured in-house may be regarded as products.
+- Besides the actual product, there can be additional artifacts related to that product that are created and used in different life cycle phases to specify the product.
+▪ 3D/CAD models
+▪ specifications
+▪ BOM
+- A Service Requester may use these additional artifacts to formulate requirements against products.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Property -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Property">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Resource"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <rdfs:comment>Quality or characteristic inherent in or ascribed to any CSS model element
+
+Notes:
+- Properties may be used to describe and differentiate all kinds of PPR entities (i.e., products, process steps, resources)
+- Capabilities, services and offers are specified by properties in order to detail their description with regard to certain entities (e.g. products, process steps, resources)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Resource -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Resource">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Service"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Entity capable of performing functions specified as Capabilities and potentially implemented as Skills.
+
+Notes
+- A production resource may consist of hardware, software or both
+- A production resource may only provide capabilities (i.e. when engineering a resource, for planning purposes) and may additionally provide skills for automatic execution of the specified function.
+- A human becomes a Production Resource, if that person is able to perform a function specified as a capability.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Service -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Service">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceOffer"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Description of the commercial aspects and means of provision of offered capabilities.
+
+Notes:
+- The term “service” should be understood in the sense of economics and shall not be confused with e.g., web services.
+- The capabilities and means of provisions are specified by properties
+- A service is demanded by service requesters and provided by a service provider
+- A service is an input for an offer proposed by</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#ServiceOffer -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#ServiceOffer">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceProvider"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#ServiceRequester"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Proposal for a binding contract from the Service Provider to execute one or more particular services that a ServiceRequester can receive and accept.
+
+Notes:
+- A ServiceOffer should determine the commercial aspects of the service provision
+and may remain valid for a certain period of time.
+- An Offer may consist of partial offers proposed by different service providers</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#ServiceProvider -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#ServiceProvider">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Provides Services and can propose ServiceOffers to ServiceRequesters.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#ServiceRequester -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#ServiceRequester">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#Skill"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillInterface"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Demands Services under particular commercial aspects by providing either a specification of
+services or a specification of product requirements.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Skill -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Skill">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <rdfs:comment>Executable implementation of an encapsulated (automation) function specified by a Capability.
+
+Notes:
+- A skill must have a skill interface. 
+- One capability can be realized by more than one skill. 
+- A skill may have any number of SkillParameters. 
+- A skill’s behavior conforms to a state machine. 
+- A skill controls a process step</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#SkillInterface -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#SkillInterface">
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#SkillParameter"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Access point to configure, control and monitor a skill.
+
+Notes:
+- A skill interface exposes interaction points to be used by other external systems
+(e.g. MES, other skills).
+- A skill interface exposes the state machine of a skill so that skill states can be
+monitored and transitions triggered.
+- A skill interface exposes the parameters of a skill so that they can be written and read.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#SkillParameter -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#SkillParameter">
+        <rdfs:subClassOf rdf:resource="http://www.w3id.org/hsu-aut/cask#SkillVariable"/>
+        <owl:disjointWith rdf:resource="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+        <rdfs:comment>Data unit to configure, control and monitor the execution of a skill.
+
+Notes:
+- Skill parameters might be used as in- /output parameters
+- Skill parameters might be used as results
+- Skill parameters might have a relation or be equivalent to capability properties</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#StateMachine -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#StateMachine"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#Library"/>
+        <meta:description>This CD defines symbols for common arithmetic functions.</meta:description>
+        <rdfs:comment>This document is distributed in the hope that it will be useful, 
+     but WITHOUT ANY WARRANTY; without even the implied warranty of 
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+     The copyright holder grants you permission to redistribute this 
+     document freely as a verbatim copy. Furthermore, the copyright
+     holder permits you to develop any derived work from this document
+     provided that the following conditions are met.
+       a) The derived work acknowledges the fact that it is derived from
+          this document, and maintains a prominent reference in the 
+          work to the original source.
+       b) The fact that the derived work is not the original OpenMath 
+          document is stated prominently in the derived work.  Moreover if
+          both this document and the derived work are Content Dictionaries
+          then the derived work must include a different CDName element,
+          chosen so that it cannot be confused with any works adopted by
+          the OpenMath Society.  In particular, if there is a Content 
+          Dictionary Group whose name is, for example, `math&apos; containing
+          Content Dictionaries named `math1&apos;, `math2&apos; etc., then you should 
+          not name a derived Content Dictionary `mathN&apos; where N is an integer.
+          However you are free to name it `private_mathN&apos; or some such.  This
+          is because the names `mathN&apos; may be used by the OpenMath Society
+          for future extensions.
+       c) The derived work is distributed under terms that allow the
+          compilation of derived works, but keep paragraphs a) and b)
+          intact.  The simplest way to do this is to distribute the derived
+          work under the OpenMath license, but this is not a requirement.
+     If you have questions about this license please contact the OpenMath
+     society at http://www.openmath.org.</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#abs -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#abs">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>for all x,y | abs(x) + abs(y) &gt;= abs(x+y)</meta:commentedProperty>
+        <meta:description>A unary operator which represents the absolute value of its
+argument. The argument should be numerically valued.
+In the complex case this is often referred to as the modulus.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#divide -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#divide">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>whenever not(a=0) then a/a = 1</meta:commentedProperty>
+        <meta:description>This symbol represents a (binary) division function denoting the first argument
+right-divided by the second, i.e. divide(a,b)=a*inverse(b). It is the
+inverse of the multiplication function defined by the symbol times in this CD.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#gcd -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#gcd">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:example>
+            <rdf:Description/>
+        </meta:example>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>for all integers a,b |
+There does not exist a c such that a/c is an Integer and b/c is an
+Integer and c &gt; gcd(a,b).
+
+Note that this implies that gcd(a,b) &gt; 0</meta:commentedProperty>
+        <meta:description>The symbol to represent the n-ary function to return the gcd (greatest
+common divisor) of its arguments.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#lcm -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#lcm">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>for all integers a,b |
+There does not exist a c&gt;0 such that c/a is an Integer and c/b is an
+Integer and lcm(a,b) &gt; c.</meta:commentedProperty>
+        <meta:commentedProperty>lcm(a,b) = a*b/gcd(a,b)</meta:commentedProperty>
+        <meta:description>The symbol to represent the n-ary function to return the least common
+multiple of its arguments.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#minus -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#minus">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>for all a,b | a - b = a + (-b)</meta:commentedProperty>
+        <meta:description>The symbol representing a binary minus function. This is equivalent to
+adding the additive inverse.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#plus -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#plus">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>for all a,b | a + b = b + a</meta:commentedProperty>
+        <meta:description>The symbol representing an n-ary commutative function plus.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#power -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#power">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:example>
+            <rdf:Description/>
+        </meta:example>
+        <meta:example>
+            <rdf:Description/>
+        </meta:example>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>if n is an integer then
+  x^0 = 1,
+  x^n = x * x^(n-1)</meta:commentedProperty>
+        <meta:commentedProperty>x\in C implies x^a = exp(a ln x)</meta:commentedProperty>
+        <meta:description>This symbol represents a power function. The first argument is raised
+to the power of the second argument. When the second argument is not
+an integer, powering is defined in terms of exponentials and 
+logarithms for the complex and real numbers.
+This operator can represent general powering.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#product -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#product">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:example rdf:nodeID="genid165"/>
+        <meta:description>An operator taking two arguments, the first being the range of multiplication
+e.g. an integral interval, the second being the function to
+be multiplied. Note that the product may be over an infinite interval.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    <rdf:Description rdf:nodeID="genid165">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math#Application"/>
+        <math:arguments>
+            <rdf:Description/>
+        </math:arguments>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#root -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#root">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>for all a,n | power(root(a,n),n) = a (if the root exists!)</meta:commentedProperty>
+        <meta:commentedProperty>x\in C implies root(x,n) = exp(ln(x)/n)</meta:commentedProperty>
+        <meta:description>A binary operator which represents its first argument &quot;lowered&quot; to its
+n&apos;th root where n is the second argument. This is the inverse of the operation
+represented by the power symbol defined in this CD.
+
+Care should be taken as to the precise meaning of this operator, in
+particular which root is represented, however it is here to represent
+the general notion of taking n&apos;th roots. As inferred by the signature
+relevant to this symbol, the function represented by this symbol is
+the single valued function, the specific root returned is the one
+indicated by the first CMP. Note also that the converse of the second
+CMP is not valid in general.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#sub -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#sub"/>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#sum -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#sum">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:example rdf:nodeID="genid169"/>
+        <meta:description>An operator taking two arguments, the first being the range of summation,
+e.g. an integral interval, the second being the function to be
+summed. Note that the sum may be over an infinite interval.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    <rdf:Description rdf:nodeID="genid169">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math#Application"/>
+        <math:arguments>
+            <rdf:Description/>
+        </math:arguments>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#times -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#times">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:example>
+            <rdf:Description/>
+        </meta:example>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>for all a,b | a * 0 = 0 and a * b = a * (b - 1) + a</meta:commentedProperty>
+        <meta:commentedProperty>for all a,b,c | a*(b+c) = a*b + a*c</meta:commentedProperty>
+        <meta:description>The symbol representing an n-ary multiplication function.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/arith1#unary_minus -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/arith1#unary_minus">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty rdf:nodeID="genid174"/>
+        <meta:commentedProperty>for all a | a + (-a) = 0</meta:commentedProperty>
+        <meta:description>This symbol denotes unary minus, i.e. the additive inverse.</meta:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.openmath.org/cd/arith1"/>
+    </owl:NamedIndividual>
+    <rdf:Description rdf:nodeID="genid174">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math#Binding"/>
+        <math:body rdf:nodeID="genid175"/>
+        <math:variables>
+            <rdf:Description/>
+        </math:variables>
+    </rdf:Description>
+    <rdf:Description rdf:nodeID="genid175">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math#Application"/>
+        <math:arguments>
+            <rdf:Description/>
+        </math:arguments>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.openmath.org/cd/transc1#cos -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/transc1#cos">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>cos 2A = cos^2 A - sin^2 A</meta:commentedProperty>
+        <meta:commentedProperty>cos A = cos(-A)</meta:commentedProperty>
+        <meta:commentedProperty>cos(x) = (exp(ix)+exp(-ix))/2</meta:commentedProperty>
+        <meta:description>This symbol represents the cos function as described in Abramowitz and
+Stegun, section 4.3. It takes one argument.</meta:description>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/transc1#ln -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/transc1#ln">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:example>
+            <rdf:Description/>
+        </meta:example>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>-pi &lt; Im ln x &lt;= pi</meta:commentedProperty>
+        <meta:description>This symbol represents the ln function (natural logarithm) as
+described in Abramowitz and Stegun, section 4.1. It takes one
+argument.  Note the description in the CMP/FMP of the branch cut.  If
+signed zeros are in use, the inequality needs to be non-strict.</meta:description>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/transc1#log -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/transc1#log">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:example>
+            <rdf:Description/>
+        </meta:example>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>a^b = c implies log_a c = b</meta:commentedProperty>
+        <meta:description>This symbol represents a binary log function; the first argument is the base,
+to which the second argument is log&apos;ed.
+It is defined in Abramowitz and Stegun, Handbook of Mathematical
+Functions, section 4.1</meta:description>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/transc1#sin -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/transc1#sin">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>sin A = - sin(-A)</meta:commentedProperty>
+        <meta:commentedProperty>sin(A + B) = sin A cos B + cos A sin B</meta:commentedProperty>
+        <meta:commentedProperty>sin(x) = (exp(ix)-exp(-ix))/2i</meta:commentedProperty>
+        <meta:description>This symbol represents the sin function as described in Abramowitz and
+Stegun, section 4.3. It takes one argument.</meta:description>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.openmath.org/cd/transc1#tan -->
+
+    <owl:NamedIndividual rdf:about="http://www.openmath.org/cd/transc1#tan">
+        <rdf:type rdf:resource="http://openmath.org/vocab/math/meta#ApplicationSymbol"/>
+        <meta:formalProperty>
+            <rdf:Description/>
+        </meta:formalProperty>
+        <meta:commentedProperty>tan A = sin A / cos A</meta:commentedProperty>
+        <meta:description>This symbol represents the tan function as described in Abramowitz and
+Stegun, section 4.3. It takes one argument.</meta:description>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#CurrentStateOutput_TD -->
+
+    <owl:NamedIndividual rdf:about="http://www.w3id.org/hsu-aut/cask#CurrentStateOutput_TD">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <DINEN61360:Definition>A CurrentStateOutput is an integer variable that is used to reflect the current state of the state machine.</DINEN61360:Definition>
+        <DINEN61360:Note>Note that there should always be instance descriptions connected to this type description that are connected to the states of the state machine in order to specify which value reflects a certain state.</DINEN61360:Note>
+        <DINEN61360:Preferred_Name>CurrentStateOutput</DINEN61360:Preferred_Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/cask#SkillCommandVariable_TD -->
+
+    <owl:NamedIndividual rdf:about="http://www.w3id.org/hsu-aut/cask#SkillCommandVariable_TD">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Type_Description"/>
+        <DINEN61360:Definition>A SkillCommandVariable is an integer variable that is used to trigger transitions of the state machine. It can be seen as the counterpart to a skill method.</DINEN61360:Definition>
+        <DINEN61360:Note>Note that there should always be instance descriptions of this type description connected to the transitions of the state machine in order to specify which values have to be used to trigger a transition.</DINEN61360:Note>
+        <DINEN61360:Preferred_Name>SkillCommandVariable</DINEN61360:Preferred_Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Array"/>
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Bag"/>
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Boolean"/>
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Integer"/>
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#List"/>
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Real"/>
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Set"/>
+            <rdf:Description rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#String"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+- Input -Name: Addition
+Domäne: Math
+Beschreibung: Crate an Ontology where a is added to b and is in sum c
+Capabilities:
+

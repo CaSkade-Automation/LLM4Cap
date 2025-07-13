@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.hsu-hh.de/aut/ontologies/drilling-capability#"
+     xml:base="http://www.hsu-hh.de/aut/ontologies/drilling-capability"
+     xmlns:CSS="http://www.w3id.org/hsu-aut/css#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:VDI3682="http://www.w3id.org/hsu-aut/VDI3682#"
+     xmlns:DINEN61360="http://www.hsu-ifa.de/ontologies/DINEN61360#">
+    <owl:Ontology rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability">
+        <owl:imports rdf:resource="https://w3id.org/hsu-aut/cask/2.5.3"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Expression_Goal -->
+
+    <owl:AnnotationProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Expression_Goal"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Logic_Interpretation -->
+
+    <owl:AnnotationProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Logic_Interpretation"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Value -->
+
+    <owl:AnnotationProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Value"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#has_Data_Element -->
+
+    <owl:AnnotationProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Data_Element"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#has_Instance_Description -->
+
+    <owl:AnnotationProperty rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#has_Instance_Description"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasInput -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasInput"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#hasOutput -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3id.org/hsu-aut/VDI3682#hasOutput"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#isRestrictedBy -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3id.org/hsu-aut/css#isRestrictedBy"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#references -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3id.org/hsu-aut/css#references"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+    
+
+
+    <!-- http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description -->
+
+    <owl:Class rdf:about="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Information -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Information"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/VDI3682#Product -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/VDI3682#Product"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#Capability -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#Capability"/>
+    
+
+
+    <!-- http://www.w3id.org/hsu-aut/css#CapabilityConstraint -->
+
+    <owl:Class rdf:about="http://www.w3id.org/hsu-aut/css#CapabilityConstraint"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling">
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#ProcessOperator"/>
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/css#Capability"/>
+        <VDI3682:hasInput rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_BlankProduct"/>
+        <VDI3682:hasInput rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth"/>
+        <VDI3682:hasInput rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter"/>
+        <VDI3682:hasOutput rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct"/>
+        <CSS:isRestrictedBy rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Constraint_Depth"/>
+        <CSS:isRestrictedBy rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Constraint_Diameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_BlankProduct -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_BlankProduct">
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Product"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Constraint_Depth -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Constraint_Depth">
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/css#CapabilityConstraint"/>
+        <CSS:references rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_ID"/>
+        <CSS:references rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Depth_ID"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Constraint_Diameter -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Constraint_Diameter">
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/css#CapabilityConstraint"/>
+        <CSS:references rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_ID"/>
+        <CSS:references rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Diameter_ID"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth">
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Information"/>
+        <DINEN61360:has_Data_Element rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_DE"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_DE -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_DE">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+        <DINEN61360:has_Instance_Description rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_ID"/>
+        <DINEN61360:has_Instance_Description rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_Req"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_ID -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_ID">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <DINEN61360:Expression_Goal>Assurance</DINEN61360:Expression_Goal>
+        <DINEN61360:Logic_Interpretation>=</DINEN61360:Logic_Interpretation>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_Req -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Depth_Req">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <DINEN61360:Expression_Goal>Requirement</DINEN61360:Expression_Goal>
+        <DINEN61360:Logic_Interpretation>&lt;</DINEN61360:Logic_Interpretation>
+        <DINEN61360:Value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">80</DINEN61360:Value>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter">
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Information"/>
+        <DINEN61360:has_Data_Element rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_DE"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_DE -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_DE">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+        <DINEN61360:has_Instance_Description rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_ID"/>
+        <DINEN61360:has_Instance_Description rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_Req1"/>
+        <DINEN61360:has_Instance_Description rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_Req2"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_ID -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_ID">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <DINEN61360:Expression_Goal>Assurance</DINEN61360:Expression_Goal>
+        <DINEN61360:Logic_Interpretation>=</DINEN61360:Logic_Interpretation>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_Req1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_Req1">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <DINEN61360:Expression_Goal>Requirement</DINEN61360:Expression_Goal>
+        <DINEN61360:Logic_Interpretation>&gt;=</DINEN61360:Logic_Interpretation>
+        <DINEN61360:Value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</DINEN61360:Value>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_Req2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_Diameter_Req2">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <DINEN61360:Expression_Goal>Requirement</DINEN61360:Expression_Goal>
+        <DINEN61360:Logic_Interpretation>&lt;=</DINEN61360:Logic_Interpretation>
+        <DINEN61360:Value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</DINEN61360:Value>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct">
+        <rdf:type rdf:resource="http://www.w3id.org/hsu-aut/VDI3682#Product"/>
+        <DINEN61360:has_Data_Element rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Depth_DE"/>
+        <DINEN61360:has_Data_Element rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Diameter_DE"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Depth_DE -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Depth_DE">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+        <DINEN61360:has_Instance_Description rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Depth_ID"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Depth_ID -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Depth_ID">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <DINEN61360:Expression_Goal>Assurance</DINEN61360:Expression_Goal>
+        <DINEN61360:Logic_Interpretation>=</DINEN61360:Logic_Interpretation>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Diameter_DE -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Diameter_DE">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Data_Element"/>
+        <DINEN61360:has_Instance_Description rdf:resource="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Diameter_ID"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Diameter_ID -->
+
+    <owl:NamedIndividual rdf:about="http://www.hsu-hh.de/aut/ontologies/drilling-capability#Drilling_DrilledProduct_Diameter_ID">
+        <rdf:type rdf:resource="http://www.hsu-ifa.de/ontologies/DINEN61360#Instance_Description"/>
+        <DINEN61360:Expression_Goal>Assurance</DINEN61360:Expression_Goal>
+        <DINEN61360:Logic_Interpretation>=</DINEN61360:Logic_Interpretation>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
