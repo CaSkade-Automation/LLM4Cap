@@ -512,7 +512,7 @@ class ChatbotWindow(QMainWindow):
     def create_vowl_graph(self):
         """Parse ontology content and generate a VOWL-like graph with interactivity."""
         g = rdflib.Graph()
-        g.parse(data=self.ontology_content, format="turtle")
+        g.parse(data=self.ontology_content, format="xml")
 
         net = Network(height="1000px", width="100%", directed=True)
 
