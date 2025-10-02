@@ -53,6 +53,14 @@ QPushButton, QToolButton {
 QPushButton:hover, QToolButton:hover {
     background-color: #666;
 }
+QMessageBox {
+    background-color: #2b2b2b;
+    color: white;
+}
+QMessageBox QLabel {
+    color: white;
+}
+
 """
 
 # Constants for ontology checking
@@ -70,8 +78,8 @@ def check_syntax(turtle_str: str):
         return [str(e)], None
 def check_reasoner( turtle_str: str , reasoner: str = "pellet", mem_mb: int = 8000):
  #. Reasoner starten
-    onto = get_ontology(r"C:\Users\....\LLM4Cap\Python\drilling.owl") #im moment muss noch direkter Pfad zu Datei im Format r"C:\Users\Anwender\...\drilling.owl" angegeben werden
-    onto_path.append(r"C:\Users\...\LLM4Cap\Python\ontologien\importsCask") #im moment muss noch direkter Pfad zu Datei im Format r"C:\Users\...\LLM4Cap\Python\ontologien\importsCask" angegeben werden
+    onto = get_ontology(r"C:\Users\xXBl4\Desktop\MB\SHK\LLM4Cap\Python\drilling.owl") #im moment muss noch direkter Pfad zu Datei im Format r"C:\Users\Anwender\...\drilling.owl" angegeben werden
+    onto_path.append(r"C:\Users\xXBl4\Desktop\MB\SHK\LLM4Cap\Python\ontologien\importsCask") #im moment muss noch direkter Pfad zu Datei im Format r"C:\Users\...\LLM4Cap\Python\ontologien\importsCask" angegeben werden
     onto.load()                                                                                 #wird später durch URIs ersetzt um aktualität zu gewährlesiten
     errors = []
     try:
@@ -218,8 +226,7 @@ class ChatbotWindow(QMainWindow):
     def initUI(self):
         self.setWindowTitle("Ontology Master")
         self.setGeometry(100, 100, 800, 600)
-        self.setStyleSheet("background-color: black;")
-
+        self.setStyleSheet("background-color: black; color: white;")
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
         self.layout = QVBoxLayout()
@@ -229,7 +236,6 @@ class ChatbotWindow(QMainWindow):
         self.ontology_dropdown.setFont(QFont("Arial", 12))
         self.ontology_dropdown.setStyleSheet("background-color: #444444; color: white; padding: 5px;")
         self.ontology_dropdown.currentIndexChanged.connect(self.load_selected_ontology)
-
         self.layout.addWidget(QLabel("Ontology Selection:", self))
         self.layout.addWidget(self.ontology_dropdown)
 
@@ -314,7 +320,6 @@ class ChatbotWindow(QMainWindow):
         action_describe.triggered.connect(self.open_describe_dialog)
         action_pdf.triggered.connect(self.open_from_pdf)
 
-        # Button in das bestehende HUD-Layout einhängen
         input_layout.addWidget(self.generate_button)
 
         self.central_widget.setLayout(self.layout)
@@ -433,8 +438,8 @@ class ChatbotWindow(QMainWindow):
 
             # 2) Anfrage an OpenAI-LLM senden
             try:
-                llm_resp = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
+                llm_resp = client.chat.completions.create(
+                    model="gpt-4o",
                     messages=[
                         {"role": "system", "content": "Du bist ein hilfreiches Ontologie-Assistenz-Tool."},
                         {"role": "user",   "content": vorgang_text}
@@ -512,7 +517,7 @@ class ChatbotWindow(QMainWindow):
     def create_vowl_graph(self):
         """Parse ontology content and generate a VOWL-like graph with interactivity."""
         g = rdflib.Graph()
-        g.parse(data=self.ontology_content, format="turtle")
+        g.parse(data=self.ontology_content, format="xml")
 
         net = Network(height="1000px", width="100%", directed=True)
 
@@ -559,10 +564,11 @@ class ChatbotWindow(QMainWindow):
             return "Error reading Basis.txt: Encoding issue detected."
         except Exception as e:
             return f"Unexpected error reading Basis.txt: {str(e)}."
+    
     def send_message(self):
-        """
-        Handles sending a message to the bot with Basis.txt, user input, and loaded ontology content in that order.
-        """
+        
+        #Handles sending a message to the bot with Basis.txt, user input, and loaded ontology content in that order.
+        
         # Load the user's input message
         user_text = self.user_input.text().strip()
         if not user_text:
@@ -586,7 +592,7 @@ class ChatbotWindow(QMainWindow):
             # Get the bot response
         response = self.get_gpt_response(combined_message)
         self.bot_messages.append(f"Bot: {response}")
-        
+        """
     def get_gpt_response(self, user_message):
         try:
             thread = client.beta.threads.create(
@@ -610,7 +616,7 @@ class ChatbotWindow(QMainWindow):
 
         except Exception as e:
             return f"Error: {str(e)}"
-    # -----  in der Klasse ChatbotWindow ergänzen  -----
+            """
     def repair_ontology(self):
         """
         Liest Fehler.txt + aktuelle Ontologie, schickt sie mit festem System-Prompt
@@ -686,7 +692,7 @@ class ChatbotWindow(QMainWindow):
             append_log(error_msg)
             return error_msg
 
-    class CapabilityGroupWidget(QWidget):
+class CapabilityGroupWidget(QWidget):
         """Ein einzelner Capability-Block (Capability, Skills, Constraint)."""
         def __init__(self, parent=None):
             super().__init__(parent)

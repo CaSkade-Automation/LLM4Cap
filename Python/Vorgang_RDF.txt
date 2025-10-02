@@ -3423,8 +3423,4 @@ Stegun, section 4.3. It takes one argument.</meta:description>
 </rdf:RDF>
 
 
-- Input -Name: Addition
-Domäne: Math
-Beschreibung: Crate an Ontology where a is added to b and is in sum c
-Capabilities:
-
+- Input -

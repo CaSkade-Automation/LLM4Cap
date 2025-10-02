@@ -1,0 +1,57 @@
+```xml
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#">
+         
+    <owl:Ontology rdf:about="http://example.org/CasseBriques"/>
+    
+    <!-- Class definitions -->
+    <owl:Class rdf:about="http://example.org/CasseBriques#Schlaeger">
+        <rdfs:label xml:lang="en">Schläger</rdfs:label>
+    </owl:Class>
+    
+    <owl:Class rdf:about="http://example.org/CasseBriques#Ball">
+        <rdfs:label xml:lang="en">Ball</rdfs:label>
+    </owl:Class>
+    
+    <owl:Class rdf:about="http://example.org/CasseBriques#Ziegel">
+        <rdfs:label xml:lang="en">Ziegel</rdfs:label>
+    </owl:Class>
+    
+    <owl:Class rdf:about="http://example.org/CasseBriques#Level">
+        <rdfs:label xml:lang="en">Level</rdfs:label>
+    </owl:Class>
+    
+    <owl:Class rdf:about="http://example.org/CasseBriques#Punkte">
+        <rdfs:label xml:lang="en">Punkte</rdfs:label>
+    </owl:Class>
+    
+    <!-- Property definitions -->
+    <owl:ObjectProperty rdf:about="http://example.org/CasseBriques#hasSchlaeger">
+        <rdfs:domain rdf:resource="http://example.org/CasseBriques#Level"/>
+        <rdfs:range rdf:resource="http://example.org/CasseBriques#Schlaeger"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="http://example.org/CasseBriques#hasBall">
+        <rdfs:domain rdf:resource="http://example.org/CasseBriques#Level"/>
+        <rdfs:range rdf:resource="http://example.org/CasseBriques#Ball"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="http://example.org/CasseBriques#hasZiegel">
+        <rdfs:domain rdf:resource="http://example.org/CasseBriques#Level"/>
+        <rdfs:range rdf:resource="http://example.org/CasseBriques#Ziegel"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="http://example.org/CasseBriques#hasPunkte">
+        <rdfs:domain rdf:resource="http://example.org/CasseBriques#Level"/>
+        <rdfs:range rdf:resource="http://example.org/CasseBriques#Punkte"/>
+    </owl:ObjectProperty>
+
+    <!-- Individual definitions -->
+    <owl:NamedIndividual rdf:about="http://example.org/CasseBriques#Level1">
+        <rdf:type rdf:resource="http://example.org/CasseBriques#Level"/>
+    </owl:NamedIndividual>
+    
+</rdf:RDF>
+```
