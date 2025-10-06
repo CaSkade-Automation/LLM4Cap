@@ -1,0 +1,10 @@
+<<<<<<< HEAD:Python/available_ontologies.txt
+.
+addition
+mixing
+drilling
+=======
+drilling
+addition
+mixing
+>>>>>>> 436b3940c036fb9b1b024ce288a1518842b7f193:available_ontologies.txt
